@@ -294,7 +294,14 @@ export function StoryMountainMobile() {
             const baseR = e.deep ? 9 : 5.5;
             const r = isFocused ? baseR + 2.5 : baseR;
             return (
-              <g key={i} filter="url(#roughMobile)">
+              <g key={i}>
+                {/* Slow expanding ring on expandable nodes (outside the rough filter). */}
+                {e.deep && (
+                  <circle className="story-node-pulse" cx={x} cy={y} r={baseR}
+                    fill="none" stroke="var(--color-accent)" strokeWidth={1.8}
+                  />
+                )}
+              <g filter="url(#roughMobile)">
                 {isFocused && (
                   <circle cx={x} cy={y} r={r + 7}
                     fill="none" stroke="#3f3a35" strokeOpacity={0.25} strokeWidth={1.4}
@@ -305,6 +312,7 @@ export function StoryMountainMobile() {
                   strokeWidth={isFocused ? 2.8 : (e.deep ? 2.2 : 1.7)}
                 />
                 {e.deep && <circle cx={x} cy={y} r={3} fill="var(--color-accent)" />}
+              </g>
               </g>
             );
           })}

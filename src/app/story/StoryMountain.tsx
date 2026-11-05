@@ -345,7 +345,14 @@ export function StoryMountain() {
               const baseR = e.deep ? 10 : 6;
               const r = isFocused ? baseR + 3 : baseR;
               return (
-                <g key={i} filter="url(#roughMain)">
+                <g key={i}>
+                  {/* Slow expanding ring on expandable nodes (outside the rough filter). */}
+                  {e.deep && (
+                    <circle className="story-node-pulse" cx={x} cy={y} r={baseR}
+                      fill="none" stroke="var(--color-accent)" strokeWidth={2}
+                    />
+                  )}
+                <g filter="url(#roughMain)">
                   {isFocused && (
                     <circle cx={x} cy={y} r={r + 8}
                       fill="none" stroke="#3f3a35" strokeOpacity={0.25} strokeWidth={1.5}
@@ -357,6 +364,7 @@ export function StoryMountain() {
                     strokeWidth={isFocused ? 3 : (e.deep ? 2.4 : 1.8)}
                   />
                   {e.deep && <circle cx={x} cy={y} r={3.5} fill="var(--color-accent)" />}
+                </g>
                 </g>
               );
             })}
