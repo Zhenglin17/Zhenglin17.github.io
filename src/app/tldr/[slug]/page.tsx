@@ -115,7 +115,11 @@ export default async function ExperienceDetailPage({ params }: Props) {
         {/* ── Header ── */}
         <div className="mb-6">
           <span className="text-xs uppercase tracking-widest text-stone-500">{item.category}</span>
-          <h1 className="text-2xl font-display text-stone-800 mt-2 mb-1 leading-snug">
+          {/* Same view-transition name as the TL;DR card title; w-fit keeps the box tight to the text. */}
+          <h1
+            className="w-fit text-2xl font-display text-stone-800 mt-2 mb-1 leading-snug"
+            style={{ viewTransitionName: `title-${item.slug}`, viewTransitionClass: "card-title" }}
+          >
             {item.title}
           </h1>
           <p className="text-stone-500 text-sm">{item.subtitle}</p>

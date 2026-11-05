@@ -38,7 +38,15 @@ function Card({ item }: { item: ExperienceItem }) {
             href={`/tldr/${item.slug}`}
             className="text-stone-800 group-hover:text-accent duration-200 font-medium text-sm leading-snug after:absolute after:inset-0"
           >
-            {item.title}
+            {/* Shares its view-transition name with the detail page h1, so the title
+                moves into place on navigation. Inline-block: a wrapped inline box
+                would be fragmented, which makes the browser skip the transition. */}
+            <span
+              className="inline-block"
+              style={{ viewTransitionName: `title-${item.slug}`, viewTransitionClass: "card-title" }}
+            >
+              {item.title}
+            </span>
           </Link>
         ) : (
           <span className="text-stone-800 font-medium text-sm leading-snug">{item.title}</span>

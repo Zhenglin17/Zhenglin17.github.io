@@ -32,6 +32,12 @@
   animation-duration: 200ms;
 }
 
+/* TL;DR card title moves into the detail page title, and back. */
+::view-transition-group(.card-title) {
+  animation-duration: 300ms;
+  animation-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-group(*),
   ::view-transition-old(*),
