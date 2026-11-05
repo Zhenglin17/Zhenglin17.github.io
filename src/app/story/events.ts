@@ -28,7 +28,8 @@ export const EVENTS: StoryEvent[] = [
   { age: 27,   altitude: 30, label: "Trading: −60% then +50% in three weeks" },
   { age: 27.5, altitude: 72, label: "Realizing experience > optimization" },
   { age: 28,   altitude: 88, label: "Back in motion — clearer than ever" },
+  { age: 28.5, altitude: 66, label: "Built asof and a research digest bot" },
 ];
 
 export const MIN_AGE = 5;
-export const MAX_AGE = 28.5;
+export const MAX_AGE = 29;

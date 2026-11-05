@@ -5,14 +5,15 @@ import { items, ExperienceItem } from "./data";
 
 const CLICKABLE_SLUGS = new Set(["normal-flow", "feature-matching"]);
 
-// Left column: NF → FC → BG   |   Right column: FM → SOLO → MS
-const COL1_SLUGS = ["normal-flow", "fruit-counting", "block-grabbing"];
-const COL2_SLUGS = ["feature-matching", "solo", "microsoft"];
-const ALL_SLUGS   = ["normal-flow", "feature-matching", "fruit-counting", "solo", "block-grabbing", "microsoft"];
+// Left column: asof → NF → FC → BG   |   Right column: Digest → FM → SOLO
+const COL1_SLUGS = ["asof", "normal-flow", "fruit-counting", "block-grabbing"];
+const COL2_SLUGS = ["research-agent", "feature-matching", "solo"];
+const ALL_SLUGS   = ["asof", "research-agent", "normal-flow", "feature-matching", "fruit-counting", "solo", "block-grabbing"];
 
 const SKILLS = [
-  "Python", "PyTorch", "NumPy", "C", "Linux", "Git", "MATLAB",
+  "Python", "PyTorch", "NumPy", "pandas", "DuckDB", "TypeScript", "C", "Linux", "Git", "MATLAB",
   "Computer Vision", "Deep Learning", "Robotics", "Sensor Fusion", "3D Vision",
+  "LLM Pipelines", "Data Pipelines", "Backtesting",
 ];
 
 function ClickableCard({ item }: { item: ExperienceItem }) {
@@ -160,7 +161,7 @@ export default function TldrPage() {
                   friends and I assembled an{" "}
                   <span className="text-stone-800 font-medium">E36 M3 race car from a bare frame</span>
                   , then ran an endurance race at NJMP. I spent months deep in trading — my
-                  account fell 60% in one month, then climbed back 50% in three weeks. Exploring
+                  account fell 60% in one month, then climbed back 50% in three weeks. I explored
                   some simple quantitative and automated methods — still aggressive, but I think
                   life is more about experience than optimization.
                 </p>
@@ -173,6 +174,14 @@ export default function TldrPage() {
                   around at people on the street — happy, relaxed — as if none of these changes
                   affect them. Yet the very skills they are most proud of today may be replaced
                   in the near future.
+                </p>
+                <p>
+                  More recently I built{" "}
+                  <span className="text-stone-800 font-medium">asof</span>, a market research rig
+                  where data and language models can only use what was public at the time. I also
+                  built a{" "}
+                  <span className="text-stone-800 font-medium">research digest bot</span> that
+                  turns journal feeds into a short brief on Telegram.
                 </p>
                 <p className="text-stone-700">
                   I&rsquo;m back now — with more clarity and motivation than I&rsquo;ve ever had.{" "}
