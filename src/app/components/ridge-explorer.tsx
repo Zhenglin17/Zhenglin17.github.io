@@ -175,6 +175,9 @@ export function RidgeExplorer({ className }: { className?: string }) {
 
 	// Mouse: follow the pointer while it is over the ridge band.
 	useEffect(() => {
+		// Showing something on its own: a pending timer (intro start, lingering
+		// label) or the climb itself, which runs on animation frames, not timers.
+		const busy = () => timers.current.length > 0 || stopClimb.current !== null;
 		const onMove = (event: PointerEvent) => {
 			const element = ref.current;
 			if (!element || event.pointerType !== "mouse") return;
@@ -186,12 +189,12 @@ export function RidgeExplorer({ className }: { className?: string }) {
 				event.clientX <= box.right;
 			if (inBand) {
 				showAt(event.clientX);
-			} else if (timers.current.length === 0) {
+			} else if (!busy()) {
 				hide();
 			}
 		};
 		const onLeave = () => {
-			if (timers.current.length === 0) hide();
+			if (!busy()) hide();
 		};
 		window.addEventListener("pointermove", onMove);
 		document.documentElement.addEventListener("pointerleave", onLeave);
