@@ -5,7 +5,7 @@ import { ImageLightbox } from "../../components/ImageLightbox";
 import { items } from "../data";
 
 export function generateStaticParams() {
-  return items.map((item) => ({ slug: item.slug }));
+  return items.filter((item) => item.hasDetails).map((item) => ({ slug: item.slug }));
 }
 
 type Props = { params: Promise<{ slug: string }> };
@@ -111,7 +111,7 @@ const maskStyleVideo = videoMask(12);
 export default async function ExperienceDetailPage({ params }: Props) {
   const { slug } = await params;
   const item = items.find((i) => i.slug === slug);
-  if (!item) notFound();
+  if (!item?.hasDetails) notFound();
 
   const media = LOCAL_MEDIA[slug] ?? {};
 
@@ -127,11 +127,13 @@ export default async function ExperienceDetailPage({ params }: Props) {
             {item.title}
           </h1>
           <p className="text-stone-500 text-sm">{item.subtitle}</p>
-          <div className="flex items-center gap-3 mt-2 text-xs text-stone-400">
-            <span>{item.period}</span>
-            <span>·</span>
-            <span>{item.location}</span>
-          </div>
+          {item.period && item.location && (
+            <div className="flex items-center gap-3 mt-2 text-xs text-stone-400">
+              <span>{item.period}</span>
+              <span>·</span>
+              <span>{item.location}</span>
+            </div>
+          )}
         </div>
 
         {/* ── Tags ── */}
@@ -146,6 +148,9 @@ export default async function ExperienceDetailPage({ params }: Props) {
 
         {/* ── Bullet points ── */}
         <section className="mb-10">
+          {item.bullets.length === 0 && (
+            <p className="text-stone-400 text-sm">Details coming soon.</p>
+          )}
           <ul className="space-y-4">
             {item.bullets.map((bullet, i) => (
               <li key={i} className="flex gap-3">

@@ -2,7 +2,8 @@ export type ExperienceItem = {
   slug: string;
   title: string;
   subtitle: string;
-  category: "Personal Project" | "Research" | "Course Project";
+  category: "Internship" | "Personal Project" | "Research" | "Course Project";
+  hasDetails?: boolean;
   tags: string[];
   location: string;
   period: string;
@@ -14,6 +15,19 @@ export type ExperienceItem = {
 
 export const items: ExperienceItem[] = [
   {
+    slug: "agent-internship",
+    title: "Agent System Internship",
+    subtitle: "Agent Systems · E-commerce",
+    category: "Internship",
+    hasDetails: true,
+    tags: ["Agent Systems", "E-commerce"],
+    location: "",
+    period: "",
+    summary: "Agent system built to improve an e-commerce platform.",
+    bullets: [],
+    links: [],
+  },
+  {
     slug: "asof",
     title: "asof · Point-in-Time Market Research Rig",
     subtitle: "Data Engineering · LLM Evaluation · Backtesting",
@@ -22,12 +36,8 @@ export const items: ExperienceItem[] = [
     location: "Independent",
     period: "Sep 2026 – Present",
     summary:
-      "Market research system where data and LLM claims can only use what was public at the time, with every claim traced to a citable source.",
-    bullets: [
-      "Built a store where every read is bound to an as-of instant: daily bars for all listed US symbols since 2020 (delisted ones included), a security master that follows tickers across renames and reuse, and 11,522 SEC filings in 703,614 citable chunks.",
-      "Made LLM judgements checkable: the model fills a fixed schema, and code verifies that each claim quotes, word for word, a passage that was public at that instant.",
-      "Measured every replay against random entries from the same pool, SPY and QQQ, with all parameter sets registered, 17 leakage guards and 40 data audits.",
-    ],
+      "Market research system where every read of data is bound to an as-of instant, covering daily bars for all listed US symbols since 2020 and 11,522 SEC filings. An LLM judge must quote a passage that was public at that instant, and code verifies each quote word for word. Every replay is measured against random entries from the same pool, SPY and QQQ.",
+    bullets: [],
     links: [
       { label: "Live Demo", href: "https://zhenglin17.github.io/asof/" },
       { label: "Code", href: "https://github.com/Zhenglin17/asof" },
@@ -42,12 +52,8 @@ export const items: ExperienceItem[] = [
     location: "Independent",
     period: "Apr 2026",
     summary:
-      "Topic-agnostic pipeline that turns journal feeds into a short LLM-written digest on Telegram, first configured for a biomedical researcher.",
-    bullets: [
-      "Built a pipeline that fetches recent papers from RSS, PubMed and bioRxiv, then dedupes, filters, ranks, summarizes and pushes a digest to Telegram.",
-      "Kept dedupe, filtering and ranking in plain code and limited the LLM to summarizing and translating, so a failed call degrades the digest instead of cancelling it.",
-      "Moved all domain knowledge into YAML, so switching fields takes no code changes; every stage writes an inspectable artifact, and the project has 200 tests.",
-    ],
+      "Topic-agnostic pipeline that fetches recent papers from RSS, PubMed and bioRxiv, then dedupes, filters, ranks and summarizes them into a Telegram digest. Ranking stays in plain code, and the LLM only summarizes and translates. All domain knowledge lives in YAML, so switching fields takes no code changes.",
+    bullets: [],
     links: [
       { label: "Code", href: "https://github.com/Zhenglin17/Research-Agent" },
     ],
@@ -57,6 +63,7 @@ export const items: ExperienceItem[] = [
     title: "Normal Flow and Camera Ego-Motion Estimation",
     subtitle: "Computer Vision · Sensor Fusion · 3D Vision · Optical Flow",
     category: "Research",
+    hasDetails: true,
     tags: ["Computer Vision", "Sensor Fusion", "3D Vision", "Optical Flow", "PyTorch"],
     location: "College Park, MD",
     period: "Dec 2023 – May 2024",
@@ -86,6 +93,7 @@ export const items: ExperienceItem[] = [
     title: "Feature Matching for Event Camera",
     subtitle: "3D Vision · Deep Learning",
     category: "Research",
+    hasDetails: true,
     tags: ["3D Vision", "Deep Learning", "COLMAP", "Event Camera"],
     location: "Philadelphia, PA",
     period: "May 2022 – Feb 2023",
@@ -121,11 +129,8 @@ export const items: ExperienceItem[] = [
     location: "Philadelphia, PA",
     period: "Nov 2021 – Mar 2022",
     summary:
-      "Multi-stage fruit counting system combining YOLO, Kalman filtering, and pose priors — reduced multi-counting by 60%.",
-    bullets: [
-      "Prototyped a multi-stage fruit counting system for long image sequences, combining YOLO detection, association and motion modeling. Kalman filtering and multi-view geometry pose priors reduced double and multi-counting by 60% while staying within deployment runtime limits.",
-      "Conducted error analysis, data validation, and runtime profiling on long sequences to identify edge cases and improve the stability of the end-to-end pipeline.",
-    ],
+      "Multi-stage fruit counting system for long image sequences, combining YOLO detection, association and motion modeling. Kalman filtering and multi-view geometry pose priors reduced double and multi-counting by 60% while staying within deployment runtime limits.",
+    bullets: [],
     links: [
       { label: "Code", href: "https://github.com/Zhenglin17/Counting-and-Tracking" },
     ],
@@ -139,11 +144,8 @@ export const items: ExperienceItem[] = [
     location: "Philadelphia, PA",
     period: "Sep 2021 – Dec 2021",
     summary:
-      "Adapted SOLO with a custom ResNet-50 + GRU backbone for biomedical image segmentation — boosted F1 by 12%.",
-    bullets: [
-      "Standardized a biomedical hemostatic plug slice dataset with DBSCAN-based preprocessing and robust augmentation, improving label consistency and raising binary instance segmentation F1 by 12% over the benchmark.",
-      "Adapted SOLO with a customized ResNet-50 backbone and added GRU modules across FPN levels for domain adaptation, improving instance segmentation accuracy after hyperparameter tuning and ablation analysis.",
-    ],
+      "Adapted SOLO with a custom ResNet-50 backbone and GRU modules across FPN levels for biomedical hemostatic plug images. DBSCAN-based preprocessing and robust augmentation improved label consistency and raised binary instance segmentation F1 by 12% over the benchmark.",
+    bullets: [],
     links: [
       { label: "Code", href: "https://github.com/Zhenglin17/Solo-and-RNN-Solo" },
     ],
@@ -157,11 +159,20 @@ export const items: ExperienceItem[] = [
     location: "Philadelphia, PA",
     period: "Dec 2020",
     summary:
-      "Robotic arm planning with A* and collision-aware trajectories — 3rd place out of 30 teams in a live 2v2 competition.",
-    bullets: [
-      "Implemented robotic arm planning with rigid body transforms, A* search and task heuristics for dynamic targets, raising pick success in a 2v2 competition by optimizing approach poses, collision-aware trajectories and execution time.",
-      "Engineered grasping and stacking in static and dynamic environments with orientation constraints and recovery logic, finishing 3rd out of 30 teams through better end-effector alignment and consistent execution under strict timing.",
-    ],
+      "Robotic arm planning with rigid body transforms, A* search and task heuristics for dynamic targets. Grasping and stacking used orientation constraints and recovery logic, finishing 3rd out of 30 teams in a live 2v2 competition.",
+    bullets: [],
+    links: [],
+  },
+  {
+    slug: "llm-fine-tuning",
+    title: "Fine-Tuning a Large Language Model",
+    subtitle: "Large Language Models",
+    category: "Personal Project",
+    tags: ["LLM", "Fine-Tuning"],
+    location: "",
+    period: "Planned",
+    summary: "A planned project on fine-tuning a large language model. Not started yet.",
+    bullets: [],
     links: [],
   },
 ];

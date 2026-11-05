@@ -3,10 +3,10 @@ import { ArrowUpRight } from "lucide-react";
 import { Navigation } from "../components/nav";
 import { items, ExperienceItem } from "./data";
 
-// Left column: asof → NF → FC → BG   |   Right column: Digest → FM → SOLO
-const COL1_SLUGS = ["asof", "normal-flow", "fruit-counting", "block-grabbing"];
-const COL2_SLUGS = ["research-agent", "feature-matching", "solo"];
-const ALL_SLUGS   = ["asof", "research-agent", "normal-flow", "feature-matching", "fruit-counting", "solo", "block-grabbing"];
+// Desktop columns stay independent so cards of different heights sit staggered.
+const COL1_SLUGS = ["agent-internship", "research-agent", "feature-matching", "solo", "llm-fine-tuning"];
+const COL2_SLUGS = ["asof", "normal-flow", "fruit-counting", "block-grabbing"];
+const ALL_SLUGS   = ["agent-internship", "asof", "research-agent", "normal-flow", "feature-matching", "fruit-counting", "solo", "block-grabbing", "llm-fine-tuning"];
 
 const SKILLS = [
   "Python", "PyTorch", "NumPy", "pandas", "DuckDB", "TypeScript", "C", "Linux", "Git", "MATLAB",
@@ -15,24 +15,41 @@ const SKILLS = [
 ];
 
 function Card({ item }: { item: ExperienceItem }) {
+  // Datasets stay on the detail page; code is one click away from the card.
+  const surfaceLinks = item.hasDetails
+    ? item.links.filter((link) => link.label.startsWith("Code"))
+    : item.links;
+
   return (
-    <Link
-      href={`/tldr/${item.slug}`}
-      className="group flex flex-col border border-stone-200 rounded-lg p-4
-                 hover:border-stone-500 hover:bg-stone-50 hover:shadow-sm
-                 duration-200 cursor-pointer"
+    <div
+      className={`relative flex flex-col rounded-lg p-4 duration-200 ${
+        item.hasDetails
+          ? "group border border-stone-200 hover:border-stone-500 hover:bg-stone-50 hover:shadow-sm"
+          : "border border-stone-100 bg-stone-50/40"
+      }`}
     >
       <div className="flex items-start justify-between gap-2 mb-1">
-        <span className="text-stone-800 font-medium text-sm leading-snug">{item.title}</span>
-        <ArrowUpRight
-          size={15}
-          className="shrink-0 mt-0.5 text-stone-500 group-hover:text-stone-800
-                     group-hover:-translate-y-0.5 group-hover:translate-x-0.5
-                     duration-200 transition-transform"
-        />
+        {item.hasDetails ? (
+          <Link
+            href={`/tldr/${item.slug}`}
+            className="text-stone-800 font-medium text-sm leading-snug after:absolute after:inset-0"
+          >
+            {item.title}
+          </Link>
+        ) : (
+          <span className="text-stone-800 font-medium text-sm leading-snug">{item.title}</span>
+        )}
+        {item.hasDetails && (
+          <ArrowUpRight
+            size={15}
+            className="shrink-0 mt-0.5 text-stone-500 group-hover:text-stone-800
+                       group-hover:-translate-y-0.5 group-hover:translate-x-0.5
+                       duration-200 transition-transform"
+          />
+        )}
       </div>
-      <p className="text-stone-400 text-xs mb-2">{item.period}</p>
-      <p className="text-stone-500 text-xs leading-relaxed flex-1">{item.summary}</p>
+      {item.period && <p className="text-stone-400 text-xs mb-2">{item.period}</p>}
+      <p className="text-stone-500 text-xs leading-relaxed">{item.summary}</p>
       <div className="flex flex-wrap gap-1 mt-3">
         {item.tags.slice(0, 3).map((tag) => (
           <span
@@ -44,7 +61,20 @@ function Card({ item }: { item: ExperienceItem }) {
           </span>
         ))}
       </div>
-    </Link>
+      {surfaceLinks.length > 0 && (
+        <div className="flex flex-wrap gap-2 mt-3">
+          {surfaceLinks.map((link) => (
+            <a
+              key={link.href} href={link.href} target="_blank" rel="noopener noreferrer"
+              className="relative z-10 text-xs text-stone-500 hover:text-stone-800 duration-200
+                         underline underline-offset-2"
+            >
+              {link.label} ↗
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
   );
 }
 
