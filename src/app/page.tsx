@@ -16,10 +16,10 @@ export default function Home() {
                          transition-transform duration-300 hover:-translate-y-0.5"
             >
               <span className="text-sm text-stone-500 transition-colors duration-300
-                               group-hover/tldr:text-stone-800">
+                               group-hover/tldr:text-accent">
                 TL;DR
               </span>
-              <span className="text-[11px] leading-tight text-stone-400 transition-colors duration-300
+              <span className="text-[11px] leading-tight text-stone-500 transition-colors duration-300
                                group-hover/tldr:text-stone-600">
                 Short on time? Quick version.
               </span>
@@ -34,10 +34,10 @@ export default function Home() {
                          transition-transform duration-300 hover:-translate-y-0.5"
             >
               <span className="text-sm text-stone-500 transition-colors duration-300
-                               group-hover/story:text-stone-800">
+                               group-hover/story:text-accent">
                 Full Story
               </span>
-              <span className="text-[11px] leading-tight text-stone-400 transition-colors duration-300
+              <span className="text-[11px] leading-tight text-stone-500 transition-colors duration-300
                                group-hover/story:text-stone-600">
                 Discover the whole journey.
               </span>
@@ -69,12 +69,12 @@ export default function Home() {
           href="https://github.com/Zhenglin17"
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:text-stone-900 duration-200"
+          className="hover:text-accent duration-200"
         >
           GitHub
         </a>
         <span aria-hidden="true">·</span>
-        <a href="mailto:zhenglinzhang6@gmail.com" className="hover:text-stone-900 duration-200">
+        <a href="mailto:zhenglinzhang6@gmail.com" className="hover:text-accent duration-200">
           Email
         </a>
       </footer>

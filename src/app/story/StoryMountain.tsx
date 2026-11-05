@@ -352,10 +352,10 @@ export function StoryMountain() {
                     />
                   )}
                   <circle cx={x} cy={y} r={r}
-                    fill="#fdfaf3" stroke="#3f3a35"
+                    fill="#fdfaf3" stroke={e.deep ? "var(--color-accent)" : "#3f3a35"}
                     strokeWidth={isFocused ? 3 : (e.deep ? 2.4 : 1.8)}
                   />
-                  {e.deep && <circle cx={x} cy={y} r={3.5} fill="#3f3a35" />}
+                  {e.deep && <circle cx={x} cy={y} r={3.5} fill="var(--color-accent)" />}
                 </g>
               );
             })}
@@ -414,7 +414,7 @@ export function StoryMountain() {
           <span className="text-[10px] uppercase tracking-widest text-stone-500 font-mono">
             full life overview
           </span>
-          <span className="text-[10px] text-stone-400 font-mono">
+          <span className="text-[10px] text-stone-500 font-mono">
             drag or click to jump
           </span>
         </div>
@@ -440,8 +440,8 @@ export function StoryMountain() {
                 cx={xFor(e.age)}
                 cy={yFor(e.altitude, MINIMAP_H, MINIMAP_PAD_TOP, MINIMAP_PAD_BOTTOM)}
                 r={e.deep ? 5 : 2.5}
-                fill={e.deep ? "#3f3a35" : "#fdfaf3"}
-                stroke="#3f3a35"
+                fill={e.deep ? "var(--color-accent)" : "#fdfaf3"}
+                stroke={e.deep ? "var(--color-accent)" : "#3f3a35"}
                 strokeWidth={1.6}
                 vectorEffect="non-scaling-stroke"
               />
@@ -500,7 +500,7 @@ function Bubble({
         {event.label}
       </p>
       {isDeep && (
-        <div className="flex items-center gap-1 mt-1.5 text-stone-700">
+        <div className="flex items-center gap-1 mt-1.5 text-accent">
           <span className="text-[10px] uppercase tracking-wider italic">read more</span>
           <ArrowUpRight size={11} />
         </div>

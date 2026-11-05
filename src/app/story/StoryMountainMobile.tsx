@@ -300,10 +300,10 @@ export function StoryMountainMobile() {
                   />
                 )}
                 <circle cx={x} cy={y} r={r}
-                  fill="#fdfaf3" stroke="#3f3a35"
+                  fill="#fdfaf3" stroke={e.deep ? "var(--color-accent)" : "#3f3a35"}
                   strokeWidth={isFocused ? 2.8 : (e.deep ? 2.2 : 1.7)}
                 />
-                {e.deep && <circle cx={x} cy={y} r={3} fill="#3f3a35" />}
+                {e.deep && <circle cx={x} cy={y} r={3} fill="var(--color-accent)" />}
               </g>
             );
           })}
@@ -343,7 +343,7 @@ export function StoryMountainMobile() {
             <span className="text-[9px] uppercase tracking-widest text-stone-500 font-mono">
               full life overview
             </span>
-            <span className="text-[9px] text-stone-400 font-mono">
+            <span className="text-[9px] text-stone-500 font-mono">
               age {centerAge.toFixed(1)}
             </span>
           </div>
@@ -369,8 +369,8 @@ export function StoryMountainMobile() {
                   key={i}
                   cx={xMini(e.age)} cy={yMini(e.altitude)}
                   r={e.deep ? 4.5 : 2.2}
-                  fill={e.deep ? "#3f3a35" : "#fdfaf3"}
-                  stroke="#3f3a35" strokeWidth={1.5}
+                  fill={e.deep ? "var(--color-accent)" : "#fdfaf3"}
+                  stroke={e.deep ? "var(--color-accent)" : "#3f3a35"} strokeWidth={1.5}
                   vectorEffect="non-scaling-stroke"
                 />
               ))}
@@ -412,7 +412,7 @@ function Bubble({ event, focused }: { event: StoryEvent; focused: boolean }) {
     >
       <p className="text-[11px] leading-snug text-stone-800 italic">{event.label}</p>
       {isDeep && (
-        <div className="flex items-center gap-0.5 mt-1 text-stone-700">
+        <div className="flex items-center gap-0.5 mt-1 text-accent">
           <span className="text-[9px] uppercase tracking-wider italic">read more</span>
           <ArrowUpRight size={10} />
         </div>

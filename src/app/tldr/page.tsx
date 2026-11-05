@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Navigation } from "../components/nav";
+import { Reveal } from "../components/reveal";
 import { items, ExperienceItem } from "./data";
 
 // Desktop columns stay independent so cards of different heights sit staggered.
@@ -22,9 +23,12 @@ function Card({ item }: { item: ExperienceItem }) {
 
   return (
     <div
-      className={`relative flex flex-col rounded-lg p-4 duration-200 ${
+      className={`relative flex flex-col rounded-lg p-4 ${
         item.hasDetails
-          ? "group border border-stone-200 hover:border-stone-500 hover:bg-stone-50 hover:shadow-sm"
+          ? `group border border-stone-200 hover:border-accent/60 hover:bg-stone-50 hover:shadow-md
+             transition-[translate,scale,box-shadow,border-color,background-color] duration-300
+             ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:-translate-y-[3px] active:translate-y-0 active:scale-[0.985]
+             motion-reduce:transition-none motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100`
           : "border border-stone-100 bg-stone-50/40"
       }`}
     >
@@ -32,7 +36,7 @@ function Card({ item }: { item: ExperienceItem }) {
         {item.hasDetails ? (
           <Link
             href={`/tldr/${item.slug}`}
-            className="text-stone-800 font-medium text-sm leading-snug after:absolute after:inset-0"
+            className="text-stone-800 group-hover:text-accent duration-200 font-medium text-sm leading-snug after:absolute after:inset-0"
           >
             {item.title}
           </Link>
@@ -42,20 +46,20 @@ function Card({ item }: { item: ExperienceItem }) {
         {item.hasDetails && (
           <ArrowUpRight
             size={15}
-            className="shrink-0 mt-0.5 text-stone-500 group-hover:text-stone-800
+            className="shrink-0 mt-0.5 text-accent
                        group-hover:-translate-y-0.5 group-hover:translate-x-0.5
                        duration-200 transition-transform"
           />
         )}
       </div>
-      {item.period && <p className="text-stone-400 text-xs mb-2">{item.period}</p>}
-      <p className="text-stone-500 text-xs leading-relaxed">{item.summary}</p>
+      {item.period && <p className="text-stone-500 text-xs mb-2">{item.period}</p>}
+      <p className="text-stone-600 text-xs leading-relaxed">{item.summary}</p>
       <div className="flex flex-wrap gap-1 mt-3">
         {item.tags.slice(0, 3).map((tag) => (
           <span
             key={tag}
             className="text-xs px-2 py-0.5 bg-stone-100 group-hover:bg-stone-200
-                       text-stone-500 rounded-full duration-200"
+                       text-stone-600 rounded-full duration-200"
           >
             {tag}
           </span>
@@ -66,8 +70,8 @@ function Card({ item }: { item: ExperienceItem }) {
           {surfaceLinks.map((link) => (
             <a
               key={link.href} href={link.href} target="_blank" rel="noopener noreferrer"
-              className="relative z-10 text-xs text-stone-500 hover:text-stone-800 duration-200
-                         underline underline-offset-2"
+              className="relative z-10 text-xs text-accent duration-200
+                         underline underline-offset-2 decoration-accent/40 hover:decoration-accent"
             >
               {link.label} ↗
             </a>
@@ -97,18 +101,18 @@ export default function TldrPage() {
               <h1 className="text-3xl font-display text-stone-800 mb-2">Zhenglin Zhang</h1>
               <div className="flex flex-col gap-1 text-sm">
                 <a href="mailto:zhenglinzhang6@gmail.com"
-                   className="text-stone-500 hover:text-stone-800 duration-200 w-fit">
+                   className="text-stone-500 hover:text-accent duration-200 w-fit">
                   zhenglinzhang6@gmail.com
                 </a>
                 <a href="https://github.com/Zhenglin17" target="_blank"
-                   className="text-stone-500 hover:text-stone-800 duration-200 w-fit">
+                   className="text-stone-500 hover:text-accent duration-200 w-fit">
                   github.com/Zhenglin17
                 </a>
               </div>
             </div>
 
             <section>
-              <h2 className="text-xs uppercase tracking-widest text-stone-400 mb-4">Narrative</h2>
+              <h2 className="text-xs uppercase tracking-widest text-stone-500 mb-4">Narrative</h2>
               <div className="space-y-3 text-sm text-stone-600 leading-relaxed">
                 <p>
                   From elementary school, I was on the olympiad math circuit — eight or nine
@@ -167,7 +171,7 @@ export default function TldrPage() {
             </section>
 
             <section>
-              <h2 className="text-xs uppercase tracking-widest text-stone-400 mb-4">Skills</h2>
+              <h2 className="text-xs uppercase tracking-widest text-stone-500 mb-4">Skills</h2>
               <div className="flex flex-wrap gap-2">
                 {SKILLS.map((skill) => (
                   <span key={skill}
@@ -181,20 +185,20 @@ export default function TldrPage() {
 
           {/* ── RIGHT: Experience ──────────────────────────── */}
           <div>
-            <h2 className="text-xs uppercase tracking-widest text-stone-400 mb-4">Experience</h2>
+            <h2 className="text-xs uppercase tracking-widest text-stone-500 mb-4">Experience</h2>
 
             {/* Mobile: single ordered column */}
             <div className="flex flex-col gap-3 sm:hidden">
-              {allOrdered.map((item) => <Card key={item.slug} item={item} />)}
+              {allOrdered.map((item) => <Reveal key={item.slug}><Card item={item} /></Reveal>)}
             </div>
 
             {/* Desktop: two flex columns — no grid gaps */}
             <div className="hidden sm:flex gap-3 items-start">
               <div className="flex flex-col gap-3 flex-1">
-                {col1.map((item) => <Card key={item.slug} item={item} />)}
+                {col1.map((item, index) => <Reveal key={item.slug} index={index}><Card item={item} /></Reveal>)}
               </div>
               <div className="flex flex-col gap-3 flex-1">
-                {col2.map((item) => <Card key={item.slug} item={item} />)}
+                {col2.map((item, index) => <Reveal key={item.slug} index={index}><Card item={item} /></Reveal>)}
               </div>
             </div>
           </div>

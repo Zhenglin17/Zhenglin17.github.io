@@ -122,13 +122,13 @@ export default async function ExperienceDetailPage({ params }: Props) {
 
         {/* ── Header ── */}
         <div className="mb-6">
-          <span className="text-xs uppercase tracking-widest text-stone-400">{item.category}</span>
+          <span className="text-xs uppercase tracking-widest text-stone-500">{item.category}</span>
           <h1 className="text-2xl font-display text-stone-800 mt-2 mb-1 leading-snug">
             {item.title}
           </h1>
           <p className="text-stone-500 text-sm">{item.subtitle}</p>
           {item.period && item.location && (
-            <div className="flex items-center gap-3 mt-2 text-xs text-stone-400">
+            <div className="flex items-center gap-3 mt-2 text-xs text-stone-500">
               <span>{item.period}</span>
               <span>·</span>
               <span>{item.location}</span>
@@ -149,7 +149,7 @@ export default async function ExperienceDetailPage({ params }: Props) {
         {/* ── Bullet points ── */}
         <section className="mb-10">
           {item.bullets.length === 0 && (
-            <p className="text-stone-400 text-sm">Details coming soon.</p>
+            <p className="text-stone-500 text-sm">Details coming soon.</p>
           )}
           <ul className="space-y-4">
             {item.bullets.map((bullet, i) => (
@@ -181,7 +181,7 @@ export default async function ExperienceDetailPage({ params }: Props) {
                         }}
                       />
                     </div>
-                    <p className="text-xs text-stone-400 mt-2 leading-relaxed">{img.caption}</p>
+                    <p className="text-xs text-stone-500 mt-2 leading-relaxed">{img.caption}</p>
                   </div>
                 ))}
               </div>
@@ -207,7 +207,7 @@ export default async function ExperienceDetailPage({ params }: Props) {
                           style={v.scaleX ? { transform: `scaleX(${v.scaleX})` } : undefined}
                         />
                       </div>
-                      <p className="text-xs text-stone-400 mt-2 leading-relaxed">{v.caption}</p>
+                      <p className="text-xs text-stone-500 mt-2 leading-relaxed">{v.caption}</p>
                     </div>
                   ))}
                 </>
@@ -224,7 +224,7 @@ export default async function ExperienceDetailPage({ params }: Props) {
                                  className="object-contain" unoptimized />
                         </div>
                         {img.caption && (
-                          <p className="text-xs text-stone-400 mt-1 leading-relaxed">{img.caption}</p>
+                          <p className="text-xs text-stone-500 mt-1 leading-relaxed">{img.caption}</p>
                         )}
                       </div>
                     ))}
@@ -238,7 +238,7 @@ export default async function ExperienceDetailPage({ params }: Props) {
                   {item.links.map((link) => (
                     <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer"
                        className="text-sm text-stone-600 border border-stone-300 rounded-lg px-3 py-1.5
-                                  hover:border-stone-500 hover:text-stone-900 duration-200">
+                                  hover:border-accent hover:text-accent duration-200">
                       {link.label} ↗
                     </a>
                   ))}
@@ -253,7 +253,7 @@ export default async function ExperienceDetailPage({ params }: Props) {
 
             {media.localImages && media.localImages.length > 0 && (
               <section className="mb-10">
-                <h2 className="text-xs uppercase tracking-widest text-stone-400 mb-6">Results</h2>
+                <h2 className="text-xs uppercase tracking-widest text-stone-500 mb-6">Results</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                   {media.localImages.map((img) => (
                     <div key={img.src}>
@@ -264,7 +264,7 @@ export default async function ExperienceDetailPage({ params }: Props) {
                         alt={img.alt}
                         className="w-full h-auto rounded-md"
                       />
-                      <p className="text-xs text-stone-400 mt-2 leading-relaxed">{img.caption}</p>
+                      <p className="text-xs text-stone-500 mt-2 leading-relaxed">{img.caption}</p>
                     </div>
                   ))}
                 </div>
@@ -273,7 +273,7 @@ export default async function ExperienceDetailPage({ params }: Props) {
 
             {media.videos && media.videos.length > 0 && (
               <section className="mb-10">
-                <h2 className="text-xs uppercase tracking-widest text-stone-400 mb-6">Demo</h2>
+                <h2 className="text-xs uppercase tracking-widest text-stone-500 mb-6">Demo</h2>
                 <div className={`grid gap-6 ${media.videos.length === 2 ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-1 sm:grid-cols-3"}`}>
                   {media.videos.map((v) => (
                     <div key={v.src}>
@@ -286,7 +286,7 @@ export default async function ExperienceDetailPage({ params }: Props) {
                         playsInline
                         className="w-full h-auto rounded-md bg-stone-100"
                       />
-                      <p className="text-xs text-stone-400 mt-2 leading-relaxed">{v.caption}</p>
+                      <p className="text-xs text-stone-500 mt-2 leading-relaxed">{v.caption}</p>
                     </div>
                   ))}
                 </div>
@@ -295,7 +295,7 @@ export default async function ExperienceDetailPage({ params }: Props) {
 
             {item.images && item.images.length > 0 && (
               <section className="mb-10">
-                <h2 className="text-xs uppercase tracking-widest text-stone-400 mb-4">Dataset</h2>
+                <h2 className="text-xs uppercase tracking-widest text-stone-500 mb-4">Dataset</h2>
                 <div className="flex flex-wrap gap-6">
                   {item.images.map((img, i) => (
                     <div key={i} className="w-40 shrink-0">
@@ -304,7 +304,7 @@ export default async function ExperienceDetailPage({ params }: Props) {
                                className="object-contain" unoptimized />
                       </div>
                       {img.caption && (
-                        <p className="text-xs text-stone-400 mt-1.5 leading-relaxed">{img.caption}</p>
+                        <p className="text-xs text-stone-500 mt-1.5 leading-relaxed">{img.caption}</p>
                       )}
                     </div>
                   ))}
@@ -314,12 +314,12 @@ export default async function ExperienceDetailPage({ params }: Props) {
 
             {item.links.length > 0 && (
               <section>
-                <h2 className="text-xs uppercase tracking-widest text-stone-400 mb-3">Links</h2>
+                <h2 className="text-xs uppercase tracking-widest text-stone-500 mb-3">Links</h2>
                 <div className="flex flex-wrap gap-3">
                   {item.links.map((link) => (
                     <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer"
                        className="text-sm text-stone-600 border border-stone-300 rounded-lg px-3 py-1.5
-                                  hover:border-stone-500 hover:text-stone-900 duration-200">
+                                  hover:border-accent hover:text-accent duration-200">
                       {link.label} ↗
                     </a>
                   ))}
