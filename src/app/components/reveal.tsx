@@ -55,6 +55,9 @@ export const Reveal = ({ children, index = 0 }: RevealProps) => {
 	return (
 		<motion.div
 			ref={ref}
+			// Phones (below sm) show items right away; the important flags beat
+			// Framer Motion's inline opacity and transform.
+			className="max-sm:opacity-100! max-sm:transform-none!"
 			initial={{ opacity: 0, y: 12 }}
 			animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
 			transition={{
