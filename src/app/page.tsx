@@ -52,7 +52,7 @@ export default function Home() {
         quantity={100}
       />
 
-      <RidgeLine className="absolute inset-x-0 bottom-0 -z-10 w-full h-[24vh] sm:h-[34vh] animate-fade-in" />
+      <RidgeLine className="absolute inset-x-0 bottom-0 -z-10 w-full h-[24vh] sm:h-[34vh] animate-fade-in-fast" />
 
       <h1 className="py-3.5 px-0.5 z-10 text-4xl text-stone-800 cursor-default font-display sm:text-5xl md:text-7xl whitespace-nowrap">
         Zhenglin Zhang
