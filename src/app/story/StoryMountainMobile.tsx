@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { EVENTS, MIN_AGE, MAX_AGE, type StoryEvent } from "./events";
+import MinimapDot from "./MinimapDot";
 
 // ──────────────────────────────────────────────────────────────────────────────
 // Mobile portrait layout: axes swapped from desktop.
@@ -364,16 +365,6 @@ export function StoryMountainMobile() {
                 fill="none"
                 vectorEffect="non-scaling-stroke"
               />
-              {EVENTS.map((e, i) => (
-                <circle
-                  key={i}
-                  cx={xMini(e.age)} cy={yMini(e.altitude)}
-                  r={e.deep ? 4.5 : 2.2}
-                  fill={e.deep ? "var(--color-accent)" : "#fdfaf3"}
-                  stroke={e.deep ? "var(--color-accent)" : "#3f3a35"} strokeWidth={1.5}
-                  vectorEffect="non-scaling-stroke"
-                />
-              ))}
               {/* Highlight band = currently visible age range */}
               <rect
                 x={highlightX}
@@ -387,6 +378,17 @@ export function StoryMountainMobile() {
                 vectorEffect="non-scaling-stroke"
               />
             </svg>
+            {/* Dots live outside the SVG: preserveAspectRatio="none" would
+                squash circles horizontally into vertical ticks. */}
+            {EVENTS.map((e, i) => (
+              <MinimapDot
+                key={i}
+                leftPercent={(xMini(e.age) / MINI_W) * 100}
+                topPx={yMini(e.altitude)}
+                deep={e.deep}
+                size={e.deep ? 10 : 6}
+              />
+            ))}
           </div>
           <div className="flex justify-between px-1 pt-1 text-[9px] text-stone-500 font-mono">
             <span>age {MIN_AGE}</span>

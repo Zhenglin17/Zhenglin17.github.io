@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import { EVENTS, MIN_AGE, MAX_AGE, type StoryEvent } from "./events";
+import MinimapDot from "./MinimapDot";
 
 // ──────────────────────────────────────────────────────────────────────────────
 // Layout: true altitude profile (Y=altitude, X=age) with minimap + pan.
@@ -434,18 +435,6 @@ export function StoryMountain() {
               fill="none"
               vectorEffect="non-scaling-stroke"
             />
-            {EVENTS.map((e, i) => (
-              <circle
-                key={i}
-                cx={xFor(e.age)}
-                cy={yFor(e.altitude, MINIMAP_H, MINIMAP_PAD_TOP, MINIMAP_PAD_BOTTOM)}
-                r={e.deep ? 5 : 2.5}
-                fill={e.deep ? "var(--color-accent)" : "#fdfaf3"}
-                stroke={e.deep ? "var(--color-accent)" : "#3f3a35"}
-                strokeWidth={1.6}
-                vectorEffect="non-scaling-stroke"
-              />
-            ))}
             {/* centered viewport window */}
             <rect
               x={panX}
@@ -460,6 +449,17 @@ export function StoryMountain() {
               vectorEffect="non-scaling-stroke"
             />
           </svg>
+          {/* Dots live outside the SVG: preserveAspectRatio="none" would
+              squash circles horizontally into vertical ticks. */}
+          {EVENTS.map((e, i) => (
+            <MinimapDot
+              key={i}
+              leftPercent={(xFor(e.age) / FULL_W) * 100}
+              topPx={yFor(e.altitude, MINIMAP_H, MINIMAP_PAD_TOP, MINIMAP_PAD_BOTTOM)}
+              deep={e.deep}
+              size={e.deep ? 11 : 6.5}
+            />
+          ))}
         </div>
         {/* age labels outside the border so the bordered frame equals the SVG;
             this keeps the viewport window visually centered */}
