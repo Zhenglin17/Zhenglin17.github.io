@@ -15,26 +15,18 @@ const LOCAL_MEDIA: Record<
   {
     mediaLayout?: "side-by-side";
     localImages?: { src: string; alt: string; label: string; caption: string; transform?: string }[];
-    videos?: { src: string; label: string; caption: string; scaleX?: number; maskFadeX?: number }[];
+    videos?: { src: string; label: string; caption?: string; scaleX?: number; maskFadeX?: number }[];
+    /** One caption for the whole video group, shown instead of per-video captions. */
+    videosCaption?: string;
   }
 > = {
   "normal-flow": {
+    videosCaption:
+      "Normal flow computed on three different groups from the EVIMO event camera dataset. Only a fixed set of sample points in the world frame is visualized, so the view goes black once those points leave the camera's field of view.",
     videos: [
-      {
-        src: "/media/normal-flow/video1.mp4",
-        label: "Demo 1",
-        caption: "Normal flow estimation on event camera sequence.",
-      },
-      {
-        src: "/media/normal-flow/video2.mp4",
-        label: "Demo 2",
-        caption: "Ego-motion estimation with IMU fusion — stabilized camera trajectory.",
-      },
-      {
-        src: "/media/normal-flow/video3.mp4",
-        label: "Demo 3",
-        caption: "Comparison: classical baseline vs. learning-based normal flow.",
-      },
+      { src: "/media/normal-flow/video1.mp4", label: "Demo 1" },
+      { src: "/media/normal-flow/video2.mp4", label: "Demo 2" },
+      { src: "/media/normal-flow/video3.mp4", label: "Demo 3" },
     ],
   },
   "feature-matching": {
@@ -286,10 +278,15 @@ export default async function ExperienceDetailPage({ params }: Props) {
                         playsInline
                         className="w-full h-auto rounded-md bg-stone-100"
                       />
-                      <p className="text-xs text-stone-500 mt-2 leading-relaxed">{v.caption}</p>
+                      {v.caption && (
+                        <p className="text-xs text-stone-500 mt-2 leading-relaxed">{v.caption}</p>
+                      )}
                     </div>
                   ))}
                 </div>
+                {media.videosCaption && (
+                  <p className="text-xs text-stone-500 mt-3 leading-relaxed">{media.videosCaption}</p>
+                )}
               </section>
             )}
 
