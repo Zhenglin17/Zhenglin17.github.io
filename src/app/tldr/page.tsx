@@ -3,8 +3,6 @@ import { ArrowUpRight } from "lucide-react";
 import { Navigation } from "../components/nav";
 import { items, ExperienceItem } from "./data";
 
-const CLICKABLE_SLUGS = new Set(["normal-flow", "feature-matching"]);
-
 // Left column: asof → NF → FC → BG   |   Right column: Digest → FM → SOLO
 const COL1_SLUGS = ["asof", "normal-flow", "fruit-counting", "block-grabbing"];
 const COL2_SLUGS = ["research-agent", "feature-matching", "solo"];
@@ -16,7 +14,7 @@ const SKILLS = [
   "LLM Pipelines", "Data Pipelines", "Backtesting",
 ];
 
-function ClickableCard({ item }: { item: ExperienceItem }) {
+function Card({ item }: { item: ExperienceItem }) {
   return (
     <Link
       href={`/tldr/${item.slug}`}
@@ -28,7 +26,7 @@ function ClickableCard({ item }: { item: ExperienceItem }) {
         <span className="text-stone-800 font-medium text-sm leading-snug">{item.title}</span>
         <ArrowUpRight
           size={15}
-          className="shrink-0 mt-0.5 text-stone-300 group-hover:text-stone-600
+          className="shrink-0 mt-0.5 text-stone-500 group-hover:text-stone-800
                      group-hover:-translate-y-0.5 group-hover:translate-x-0.5
                      duration-200 transition-transform"
         />
@@ -46,60 +44,8 @@ function ClickableCard({ item }: { item: ExperienceItem }) {
           </span>
         ))}
       </div>
-      <p className="text-xs text-stone-400 group-hover:text-stone-600 mt-3
-                    opacity-0 group-hover:opacity-100 duration-200">
-        View details →
-      </p>
     </Link>
   );
-}
-
-function StaticCard({ item }: { item: ExperienceItem }) {
-  return (
-    <div className="flex flex-col border border-stone-100 rounded-lg p-4 bg-stone-50/40">
-      <span className="text-stone-700 font-medium text-sm leading-snug mb-0.5">{item.title}</span>
-      <p className="text-stone-400 text-xs mb-1">
-        {item.period} · {item.location}
-      </p>
-      <p className="text-xs text-stone-400 italic mb-2">{item.subtitle}</p>
-
-      <ul className="space-y-2 mb-3">
-        {item.bullets.map((bullet, i) => (
-          <li key={i} className="flex gap-2">
-            <span className="mt-1.5 shrink-0 w-1 h-1 rounded-full bg-stone-300" />
-            <p className="text-xs text-stone-500 leading-relaxed">{bullet}</p>
-          </li>
-        ))}
-      </ul>
-
-      <div className="flex flex-wrap gap-1 mt-auto">
-        {item.tags.slice(0, 3).map((tag) => (
-          <span key={tag} className="text-xs px-2 py-0.5 bg-stone-100 text-stone-400 rounded-full">
-            {tag}
-          </span>
-        ))}
-      </div>
-
-      {item.links.length > 0 && (
-        <div className="flex flex-wrap gap-2 mt-3">
-          {item.links.map((link) => (
-            <a
-              key={link.href} href={link.href} target="_blank" rel="noopener noreferrer"
-              className="text-xs text-stone-400 hover:text-stone-700 duration-200 underline underline-offset-2"
-            >
-              {link.label} ↗
-            </a>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
-
-function Card({ item }: { item: ExperienceItem }) {
-  return CLICKABLE_SLUGS.has(item.slug)
-    ? <ClickableCard item={item} />
-    : <StaticCard item={item} />;
 }
 
 export default function TldrPage() {
