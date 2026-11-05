@@ -10,6 +10,40 @@ type NavProps = { backHref?: string };
 // or a direct visit starts fresh and the back arrow falls back to its link.
 let lastNavPath: string | null = null;
 
+const NO_TRANSITION_QUERY = "(max-width: 639px), (prefers-reduced-motion: reduce)";
+const BACK_SETTLE_MS = 60;
+const BACK_TIMEOUT_MS = 1500;
+
+/**
+ * History back does not run the page view transition, so start one by hand:
+ * the browser snapshots the detail page, we go back, wait until the target
+ * page is rendered with its scroll restored, then the title animates into its card.
+ * Phones and reduced motion just go back.
+ */
+function backWithTransition(targetPath: string, goBack: () => void) {
+	if (!document.startViewTransition || window.matchMedia(NO_TRANSITION_QUERY).matches) {
+		goBack();
+		return;
+	}
+	document.startViewTransition(
+		() =>
+			new Promise<void>((resolve) => {
+				const started = Date.now();
+				// Timers, not requestAnimationFrame: rendering is paused during the update.
+				const check = () => {
+					const arrived = window.location.pathname === targetPath;
+					if (arrived || Date.now() - started > BACK_TIMEOUT_MS) {
+						window.setTimeout(resolve, arrived ? BACK_SETTLE_MS : 0);
+					} else {
+						window.setTimeout(check, 16);
+					}
+				};
+				goBack();
+				check();
+			}),
+	);
+}
+
 export const Navigation: React.FC<NavProps> = ({ backHref = "/" }) => {
 	const ref = useRef<HTMLElement>(null);
 	const [isIntersecting, setIntersecting] = useState(true);
@@ -27,9 +61,10 @@ export const Navigation: React.FC<NavProps> = ({ backHref = "/" }) => {
 	// Coming straight from the back target: step back in history instead, so the
 	// browser restores the scroll position (e.g. the card that was opened).
 	const onBackClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
-		const plainClick = !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey;		if (plainClick && previousPath.current === backHref) {
+		const plainClick = !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey;
+		if (plainClick && previousPath.current === backHref) {
 			event.preventDefault();
-			router.back();
+			backWithTransition(backHref, () => router.back());
 		}
 	};
 
