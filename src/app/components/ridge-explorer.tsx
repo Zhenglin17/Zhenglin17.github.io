@@ -10,7 +10,9 @@ const LOW_ALTITUDE = 35;
 const BAND_REACH_ABOVE = 40;
 // Intro climb: once per tab, the dot climbs the ridge from the left and the
 // ridge is drawn behind it; the dot stops on the newest event.
-const INTRO_STORAGE_KEY = "ridgeIntroSeen";
+// Module state: reset by a full page load (refresh, typed URL), kept across
+// client-side navigation, so returning from /story or /tldr does not replay it.
+let introPlayed = false;
 const INTRO_DELAY_MS = 250;
 const CLIMB_MS = 3500;
 const LABEL_HOLD_MS = 2500;
@@ -103,16 +105,10 @@ export function RidgeExplorer({ className }: { className?: string }) {
 		return () => window.removeEventListener("resize", update);
 	}, []);
 
-	// Intro climb, once per tab. The ridge (and the markers) are masked up to the
+	// Intro climb, once per page load. The ridge (and the markers) are masked up to the
 	// dot through a CSS variable on <html>, so the line is drawn as the dot climbs.
 	useEffect(() => {
-		let seen = false;
-		try {
-			seen = sessionStorage.getItem(INTRO_STORAGE_KEY) === "1";
-		} catch {
-			// Storage blocked: just play it.
-		}
-		if (seen || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+		if (introPlayed || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
 		const root = document.documentElement;
 		root.style.setProperty(REVEAL_VAR, "0%");
@@ -148,12 +144,8 @@ export function RidgeExplorer({ className }: { className?: string }) {
 				return;
 			}
 			finish();
-			try {
-				// Marked only once it has played, so a repeated effect run still plays it.
-				sessionStorage.setItem(INTRO_STORAGE_KEY, "1");
-			} catch {
-				// Ignore.
-			}
+			// Marked only once it has played, so a repeated effect run still plays it.
+			introPlayed = true;
 			setIndex(NEWEST_INDEX);
 			setLabelVisible(true);
 			later(hide, LABEL_HOLD_MS);
