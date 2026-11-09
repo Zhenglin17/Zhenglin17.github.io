@@ -5,9 +5,9 @@ import { Reveal } from "../components/reveal";
 import { items, ExperienceItem } from "./data";
 
 // Desktop columns stay independent so cards of different heights sit staggered.
-const COL1_SLUGS = ["agent-internship", "research-agent", "feature-matching", "solo", "llm-fine-tuning"];
+const COL1_SLUGS = ["plantops", "research-agent", "feature-matching", "solo"];
 const COL2_SLUGS = ["asof", "normal-flow", "fruit-counting", "block-grabbing"];
-const ALL_SLUGS   = ["agent-internship", "asof", "research-agent", "normal-flow", "feature-matching", "fruit-counting", "solo", "block-grabbing", "llm-fine-tuning"];
+const ALL_SLUGS   = ["plantops", "asof", "research-agent", "normal-flow", "feature-matching", "fruit-counting", "solo", "block-grabbing"];
 
 const SKILLS = [
   "Python", "PyTorch", "NumPy", "pandas", "DuckDB", "TypeScript", "C", "Linux", "Git", "MATLAB",

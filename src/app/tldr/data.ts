@@ -2,7 +2,7 @@ export type ExperienceItem = {
   slug: string;
   title: string;
   subtitle: string;
-  category: "Internship" | "Personal Project" | "Research" | "Course Project";
+  category: "Work" | "Personal Project" | "Research" | "Course Project";
   hasDetails?: boolean;
   tags: string[];
   location: string;
@@ -15,16 +15,24 @@ export type ExperienceItem = {
 
 export const items: ExperienceItem[] = [
   {
-    slug: "agent-internship",
-    title: "Agent System Internship",
-    subtitle: "Agent Systems · E-commerce",
-    category: "Internship",
+    slug: "plantops",
+    title: "PlantOps · Inventory and Fulfillment System",
+    subtitle: "Data Analyst at Wuhoo Tropicals · Full-Stack · Workflow Automation",
+    category: "Work",
     hasDetails: true,
-    tags: ["Agent Systems", "E-commerce"],
-    location: "",
-    period: "",
-    summary: "Agent system built to improve an e-commerce platform.",
-    bullets: [],
+    tags: ["Django", "PostgreSQL", "Workflow Automation", "OCR", "LLM Structured Output", "Docker"],
+    location: "Remote",
+    period: "Jan 2026 – Present",
+    summary:
+      "Internal web app, developed with the assistance of coding agents, that runs a rare-plant e-commerce company's daily work, from plant records and care logs to live-sale prep, orders, shipping and returns. It significantly cut the time spent on care logging and record keeping, prevented missed details, simplified inventory management, and shortened live-sale prep. In daily use by the team.",
+    bullets: [
+      "Designed and shipped a Django and PostgreSQL system covering the whole workflow: plant records, care history and shelf moves, live-sale showcase cards, manual order entry, reservations, packing checks, shipping and returns.",
+      "Turned live-sale prep into a one-click sheet export built on the plant database, cutting the work before each live sale from about two hours to about 15 minutes.",
+      "Kept every care action, move and correction as history, so new staff can look up a plant's past instead of asking around, and details no longer get lost between people.",
+      "Kept stock counts correct under concurrency. Reservations, shipping and returns run in short transactions that take row locks in a fixed order, and a database constraint lets one plant back at most one active order. Retried requests are idempotent, and a stale page cannot ship a cancelled order.",
+      "Made label reading work with real phone photos. Tesseract OCR has an optional vision-model fallback, plus close-up retakes and manual entry, and every match is shown as candidates for staff to pick. A natural-language box drafts care logs through structured LLM output, which the app validates before anything is written.",
+      "Shipped with automated tests (two-connection concurrency tests, Playwright browser flows), Docker Compose deployment, role-based access to private photos, and a backup-and-restore path tested on a clean environment.",
+    ],
     links: [],
   },
   {
