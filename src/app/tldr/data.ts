@@ -37,15 +37,20 @@ export const items: ExperienceItem[] = [
   },
   {
     slug: "asof",
-    title: "asof · Point-in-Time Market Research Rig",
-    subtitle: "Data Engineering · LLM Evaluation · Backtesting",
+    title: "asof · Point-in-Time Market Agent",
+    subtitle: "Data Engineering · LLM Evaluation · Backtesting · Statistical Testing",
     category: "Personal Project",
-    tags: ["Python", "DuckDB", "LLM Evaluation", "Backtesting", "Data Pipelines"],
+    hasDetails: true,
+    tags: ["Python", "DuckDB", "LLM Evaluation", "Backtesting", "Statistical Testing", "Data Pipelines"],
     location: "Independent",
     period: "Sep 2026 – Present",
     summary:
-      "Market research system where every read of data is bound to an as-of instant, covering daily bars for all listed US symbols since 2020 and 11,522 SEC filings. An LLM judge must quote a passage that was public at that instant, and code verifies each quote word for word. Every replay is measured against random entries from the same pool, SPY and QQQ.",
-    bullets: [],
+      "Point-in-time market research system that scans every evening, gathers filings as evidence, judges, executes in simulation and attributes each result, where every read of data sees only what was public at that instant. An LLM judge must quote a filing passage that was public then, checked word for word by code. Every strategy is measured by a pre-registered statistical gate before any claim of an edge.",
+    bullets: [
+      "Tested for an edge statistically. A permutation null replaces each trade's security with a random one from the same candidate pool on the same dates, 1,000 times, and p-values are corrected with a max statistic across every variant tried. Walk-forward windows, a thin-edge check (dropping the best trades, adding extra cost) and the minimum detectable edge sit beside SPY, QQQ and a top-10 basket.",
+      "Pre-registered the evaluation protocol: development, holdout and clean dates and every gate setting are committed before a strategy is developed, and later edits may only append. Each strategy may open the sealed holdout year once, and results are split at the LLM's training cutoff.",
+      "Wrote 17 leakage guards, each held by tests, plus a truncation test that rebuilds the security master from only what was knowable at an instant. On the real store, an audit runs 40 data checks.",
+    ],
     links: [
       { label: "Live Demo", href: "https://zhenglin17.github.io/asof/" },
       { label: "Code", href: "https://github.com/Zhenglin17/asof" },

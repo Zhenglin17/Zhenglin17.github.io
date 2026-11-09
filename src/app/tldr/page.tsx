@@ -16,9 +16,9 @@ const SKILLS = [
 ];
 
 function Card({ item }: { item: ExperienceItem }) {
-  // Datasets stay on the detail page; code is one click away from the card.
+  // Datasets stay on the detail page; code and live demos are one click away from the card.
   const surfaceLinks = item.hasDetails
-    ? item.links.filter((link) => link.label.startsWith("Code"))
+    ? item.links.filter((link) => link.label.startsWith("Code") || link.label === "Live Demo")
     : item.links;
 
   return (

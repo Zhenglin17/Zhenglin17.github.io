@@ -2,6 +2,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Navigation } from "../../components/nav";
 import { ImageLightbox } from "../../components/ImageLightbox";
+import { AsofPipeline } from "./AsofPipeline";
 import { items } from "../data";
 
 export function generateStaticParams() {
@@ -18,8 +19,16 @@ const LOCAL_MEDIA: Record<
     videos?: { src: string; label: string; caption?: string; scaleX?: number; maskFadeX?: number }[];
     /** One caption for the whole video group, shown instead of per-video captions. */
     videosCaption?: string;
+    /** Interactive diagram shown above the bullets. */
+    diagram?: "asof-pipeline";
+    /** Heading above the bullets, used when a diagram comes first. */
+    bulletsHeading?: string;
   }
 > = {
+  asof: {
+    diagram: "asof-pipeline",
+    bulletsHeading: "How it is tested",
+  },
   "normal-flow": {
     videosCaption:
       "Normal flow computed on three different groups from the EVIMO event camera dataset. Only a fixed set of sample points in the world frame is visualized, so the view goes black once those points leave the camera's field of view.",
@@ -142,8 +151,13 @@ export default async function ExperienceDetailPage({ params }: Props) {
           ))}
         </div>
 
+        {media.diagram === "asof-pipeline" && <AsofPipeline />}
+
         {/* ── Bullet points ── */}
         <section className="mb-10">
+          {media.bulletsHeading && (
+            <h2 className="text-xs uppercase tracking-widest text-stone-500 mb-4">{media.bulletsHeading}</h2>
+          )}
           {item.bullets.length === 0 && (
             <p className="text-stone-500 text-sm">Details coming soon.</p>
           )}
