@@ -81,7 +81,7 @@ export const items: ExperienceItem[] = [
     location: "College Park, MD",
     period: "Sep 2023 – Jan 2024",
     summary:
-      "PhD research at UMD on normal flow for event cameras. Set up normal flow baselines on the EVIMO dataset, where only optical flow baselines existed before, and used the IMU's rotation to separate camera ego-motion from the flow.",
+      "Research at UMD on normal flow for event cameras. Set up normal flow baselines on the EVIMO dataset, where only optical flow baselines existed before, and used the IMU's rotation to separate camera ego-motion from the flow.",
     bullets: [
       "Helped define normal flow baselines on EVIMO. Earlier event camera work only reported optical flow baselines, so normal flow methods had nothing fair to be compared against.",
       "Surveyed dozens of event-based flow papers and found almost none whose released code ran as published. Spent a significant amount of time studying, understanding, modifying and porting existing code, and brought E-RAFT, a learning-based optical flow model, to EVIMO as the learning-based baseline.",
@@ -103,7 +103,7 @@ export const items: ExperienceItem[] = [
   },
   {
     slug: "feature-matching",
-    title: "Feature Matching for Event Camera",
+    title: "Feature Matching for Event Cameras",
     subtitle: "3D Vision · Deep Learning",
     category: "Research",
     hasDetails: true,
@@ -111,25 +111,22 @@ export const items: ExperienceItem[] = [
     location: "Philadelphia, PA",
     period: "May 2022 – Feb 2023",
     summary:
-      "Trained keypoint matching network on event camera data using COLMAP-based ground truth — improved accuracy under motion blur and low-light.",
+      "Research assistant in Kostas Daniilidis's group at Penn. Event camera data has no ground truth for feature matching, so the work had two hard parts: generating it from COLMAP reconstructions of the paired frame camera, and training keypoint matching networks on it.",
     bullets: [
-      "Aligned DSEC event streams with conventional frames and triangulated 3D points with COLMAP, creating reliable ground-truth correspondences and greatly increasing the usable training pairs for event-based feature matching.",
-      "Trained a keypoint matching network with a cross-entropy interest point loss and a hinge descriptor loss, improving accuracy under motion blur and low light through patch-based versus global ablations and more effective hard negative mining.",
+      "Generated ground-truth matches where none existed. Reconstructed DSEC sequences in 3D with COLMAP from the frame camera, then carried each 3D point into the event camera through disparity, rectification and the stereo extrinsics, so the same point could be located across event frames.",
+      "Trained a SuperPoint-style network on events: a shared VGG-style encoder, an interest point head trained with a cross-entropy loss, and a descriptor head trained with a hinge loss that pulls matching descriptors together and pushes non-matching ones apart.",
+      "Compared it with a patch-based approach, a ConvNet that scores the similarity of two event patches, and visualized its predicted matches across sequences.",
+      "Explored next steps: detector-free matching with transformers (LoFTR) to use global context instead of enumerating grids, and motion-equivariant networks.",
     ],
     links: [
       { label: "DSEC Dataset", href: "https://dsec.ifi.uzh.ch/" },
-      { label: "Code", href: "https://github.com/Zhenglin17/Feature-point-matching" },
+      { label: "Report", href: "https://drive.google.com/file/d/1G2fUrLRsLN384jCvUgm6dno3QSWIb_J7/view" },
     ],
     images: [
       {
-        src: "https://dsec.ifi.uzh.ch/wp-content/uploads/2021/05/thumbnail.png",
+        src: "/media/dsec/dsec-overview.png",
         alt: "DSEC dataset overview",
         caption: "DSEC — large-scale stereo event camera dataset for driving scenarios.",
-      },
-      {
-        src: "https://dsec.ifi.uzh.ch/wp-content/uploads/2021/10/flow-thumbnail.png",
-        alt: "DSEC optical flow ground truth",
-        caption: "DSEC optical flow ground truth used for training and evaluation.",
       },
     ],
   },

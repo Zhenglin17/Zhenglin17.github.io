@@ -58,40 +58,38 @@ const LOCAL_MEDIA: Record<
         alt: "3D reconstruction via COLMAP",
         label: "3D Reconstruction",
         caption:
-          "3D point cloud via COLMAP — used as ground truth for supervising the keypoint matching network.",
+          "COLMAP reconstruction of a DSEC sequence from the frame camera; the red path is the camera trajectory. Its 3D points are the source of the ground-truth matches.",
         transform: "scale(0.8, 1.2)",
       },
       {
         src: "/media/dsec/compare.png",
         alt: "Feature matching comparison",
-        label: "Comparison",
+        label: "Ground Truth",
         caption:
-          "Single mono frame feature matching — model output vs. baseline under challenging lighting.",
+          "Generated ground truth: the same 3D point (red box) found in two event frames.",
         transform: "scaleX(0.8)",
       },
       {
         src: "/media/dsec/result.png",
         alt: "Feature matching result",
-        label: "Result",
+        label: "Predicted Matches",
         caption:
-          "Qualitative matching result on DSEC event frames — keypoint correspondences overlaid on image pairs.",
+          "Matches predicted by the patch-based network between two event frames.",
         transform: "scaleX(0.8)",
       },
     ],
     videos: [
       {
         src: "/media/dsec/test_background.mp4",
-        label: "Background Sequence",
-        caption:
-          "Feature matching on a background-dominated sequence — robustness under low-motion conditions.",
+        label: "Over Event Frames",
+        caption: "The network's predicted matches drawn over the event frames.",
         scaleX: 1.18,
         maskFadeX: 15,
       },
       {
         src: "/media/dsec/test.mp4",
-        label: "Motion Sequence",
-        caption:
-          "Feature matching on a dynamic sequence — performance under motion blur and rapid scene change.",
+        label: "Predicted Motion",
+        caption: "The network's predicted matches tracked over a sequence, drawn as motion arrows.",
         maskFadeX: 15,
       },
     ],
