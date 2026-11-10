@@ -15,7 +15,7 @@ const SKILLS = [
   "LLM Pipelines", "Data Pipelines", "Backtesting",
 ];
 
-function Card({ item }: { item: ExperienceItem }) {
+function Card({ item, fill = false }: { item: ExperienceItem; fill?: boolean }) {
   // Datasets stay on the detail page; code and live demos are one click away from the card.
   const surfaceLinks = item.hasDetails
     ? item.links.filter((link) => link.label.startsWith("Code") || link.label === "Live Demo")
@@ -23,7 +23,7 @@ function Card({ item }: { item: ExperienceItem }) {
 
   return (
     <div
-      className={`relative flex flex-col rounded-lg p-4 ${
+      className={`relative flex flex-col rounded-lg p-4 ${fill ? "flex-1" : ""} ${
         item.hasDetails
           ? `group border border-stone-200 hover:border-accent/60 hover:bg-stone-50 hover:shadow-md
              transition-[translate,scale,box-shadow,border-color,background-color] duration-300
@@ -201,13 +201,20 @@ export default function TldrPage() {
             </div>
 
             {/* Desktop: two flex columns — no grid gaps */}
-            <div className="hidden sm:flex gap-3 items-start">
-              <div className="flex flex-col gap-3 flex-1">
-                {col1.map((item, index) => <Reveal key={item.slug} index={index}><Card item={item} /></Reveal>)}
-              </div>
-              <div className="flex flex-col gap-3 flex-1">
-                {col2.map((item, index) => <Reveal key={item.slug} index={index}><Card item={item} /></Reveal>)}
-              </div>
+            {/* The last card of each column stretches so both columns end on one line. */}
+            <div className="hidden sm:flex gap-3 items-stretch">
+              {[col1, col2].map((column, columnIndex) => (
+                <div key={columnIndex} className="flex flex-col gap-3 flex-1">
+                  {column.map((item, index) => {
+                    const isLast = index === column.length - 1;
+                    return (
+                      <Reveal key={item.slug} index={index} className={isLast ? "flex-1 flex flex-col" : ""}>
+                        <Card item={item} fill={isLast} />
+                      </Reveal>
+                    );
+                  })}
+                </div>
+              ))}
             </div>
           </div>
 

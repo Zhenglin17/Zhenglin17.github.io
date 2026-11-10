@@ -147,17 +147,18 @@ export const items: ExperienceItem[] = [
   },
   {
     slug: "solo",
-    title: "SOLO on Biomedical Hemostatic Plug Image",
+    title: "SOLO Instance Segmentation for Hemostatic Plug Microscopy",
     subtitle: "Instance Segmentation · Deep Learning · Model Architecture",
     category: "Course Project",
-    tags: ["Instance Segmentation", "Deep Learning", "ResNet-50", "GRU", "DBSCAN"],
+    tags: ["Instance Segmentation", "Deep Learning", "ResNet-50", "GRU"],
     location: "Philadelphia, PA",
     period: "Sep 2021 – Dec 2021",
     summary:
-      "Adapted SOLO with a custom ResNet-50 backbone and GRU modules across FPN levels for biomedical hemostatic plug images. DBSCAN-based preprocessing and robust augmentation improved label consistency and raised binary instance segmentation F1 by 12% over the benchmark.",
+      "Team course project at Penn applying the SOLO instance segmentation model to microscopy scans of hemostatic plugs from Penn Medicine. Built the ResNet-50 + FPN backbone, the SOLO head and the mAP evaluation; the best of four target-assignment settings reached 0.647 average precision. Also explored a bidirectional convolutional GRU over neighboring slices at each FPN level.",
     bullets: [],
     links: [
       { label: "Code", href: "https://github.com/Zhenglin17/Solo-and-RNN-Solo" },
+      { label: "Report", href: "https://docs.google.com/document/d/1GffDAHFVkMCEt3rDi8zyPT-g9kc8pWQHx-7a3zevEv0/edit?usp=sharing" },
     ],
   },
   {
@@ -165,11 +166,11 @@ export const items: ExperienceItem[] = [
     title: "Block Grabbing · Robotic Arm Motion",
     subtitle: "Motion Planning · Control",
     category: "Course Project",
-    tags: ["Motion Planning", "A* Search", "Rigid Body Transforms", "Control"],
+    tags: ["Motion Planning", "A* Search", "PyBullet", "Rigid Body Transforms", "Control"],
     location: "Philadelphia, PA",
     period: "Dec 2020",
     summary:
-      "Robotic arm planning with rigid body transforms, A* search and task heuristics for dynamic targets. Grasping and stacking used orientation constraints and recovery logic, finishing 3rd out of 30 teams in a live 2v2 competition.",
+      "Course final project at Penn: a simulated robotic arm in PyBullet that grabs and stacks both static and moving blocks in a 2v2 competition. Planned motions with rigid body transforms and A* search, picked targets with task heuristics, and added orientation constraints and recovery logic to grasping and stacking. Tuned approach poses and collision-aware trajectories to keep picks reliable under the time limit. Finished 3rd out of 30 teams.",
     bullets: [],
     links: [],
   },

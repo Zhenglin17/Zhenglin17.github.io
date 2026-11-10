@@ -6,6 +6,7 @@ type RevealProps = {
 	children: ReactNode;
 	/** Position in its column; adds a small capped delay so items enter in sequence. */
 	index?: number;
+	className?: string;
 };
 
 const STEP_SECONDS = 0.04;
@@ -19,7 +20,7 @@ const RECHECK_MS = 500;
  * items already on screen never got an intersecting callback and stayed hidden.
  * Position is therefore also checked directly on mount and once more shortly after.
  */
-export const Reveal = ({ children, index = 0 }: RevealProps) => {
+export const Reveal = ({ children, index = 0, className = "" }: RevealProps) => {
 	const reduceMotion = useReducedMotion();
 	const ref = useRef<HTMLDivElement>(null);
 	const [revealed, setRevealed] = useState(false);
@@ -50,14 +51,14 @@ export const Reveal = ({ children, index = 0 }: RevealProps) => {
 		};
 	}, []);
 
-	if (reduceMotion) return <div>{children}</div>;
+	if (reduceMotion) return <div className={className}>{children}</div>;
 
 	return (
 		<motion.div
 			ref={ref}
 			// Phones (below sm) show items right away; the important flags beat
 			// Framer Motion's inline opacity and transform.
-			className="max-sm:opacity-100! max-sm:transform-none!"
+			className={`max-sm:opacity-100! max-sm:transform-none! ${className}`}
 			initial={{ opacity: 0, y: 12 }}
 			animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
 			transition={{
