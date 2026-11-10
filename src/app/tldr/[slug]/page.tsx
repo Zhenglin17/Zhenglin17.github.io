@@ -19,6 +19,8 @@ const LOCAL_MEDIA: Record<
     videos?: { src: string; label: string; caption?: string; scaleX?: number; maskFadeX?: number }[];
     /** One caption for the whole video group, shown instead of per-video captions. */
     videosCaption?: string;
+    /** Heading for localImages in the default layout (defaults to "Results"). */
+    imagesHeading?: string;
     /** Interactive diagram shown above the bullets. */
     diagram?: "asof-pipeline";
     /** Heading above the bullets, used when a diagram comes first. */
@@ -30,6 +32,16 @@ const LOCAL_MEDIA: Record<
     bulletsHeading: "How it is tested",
   },
   "normal-flow": {
+    imagesHeading: "IMU alignment",
+    localImages: [
+      {
+        src: "/media/normal-flow/imu-alignment.png",
+        alt: "Camera angular velocity from motion capture compared with IMU gyroscope readings",
+        label: "Camera (top) vs. IMU (bottom)",
+        caption:
+          "Angular velocity over one EVIMO sequence. Top: computed from the motion-capture camera poses. Bottom: the IMU gyroscope, with its axes mapped to the camera frame. The three axes match.",
+      },
+    ],
     videosCaption:
       "Normal flow computed on three different groups from the EVIMO event camera dataset. Only a fixed set of sample points in the world frame is visualized, so the view goes black once those points leave the camera's field of view.",
     videos: [
@@ -263,8 +275,8 @@ export default async function ExperienceDetailPage({ params }: Props) {
 
             {media.localImages && media.localImages.length > 0 && (
               <section className="mb-10">
-                <h2 className="text-xs uppercase tracking-widest text-stone-500 mb-6">Results</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                <h2 className="text-xs uppercase tracking-widest text-stone-500 mb-6">{media.imagesHeading ?? "Results"}</h2>
+                <div className={`grid gap-6 ${media.localImages.length === 1 ? "grid-cols-1" : "grid-cols-1 sm:grid-cols-3"}`}>
                   {media.localImages.map((img) => (
                     <div key={img.src}>
                       <p className="text-xs font-medium text-stone-500 mb-2">{img.label}</p>

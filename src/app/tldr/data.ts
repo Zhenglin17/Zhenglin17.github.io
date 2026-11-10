@@ -65,7 +65,7 @@ export const items: ExperienceItem[] = [
     location: "Independent",
     period: "Apr 2026",
     summary:
-      "Topic-agnostic pipeline that fetches recent papers from RSS, PubMed and bioRxiv, then dedupes, filters, ranks and summarizes them into a Telegram digest. Ranking stays in plain code, and the LLM only summarizes and translates. All domain knowledge lives in YAML, so switching fields takes no code changes.",
+      "Topic-agnostic digest bot that pulls new content from configured sources (RSS, PubMed and bioRxiv so far), dedupes, filters and ranks it in plain code, then has an LLM summarize and translate the top picks into a Telegram message. Topics live in YAML and sources plug in behind one interface, so it can follow any field or platform without code changes. Ran stably three evenings a week for over two months.",
     bullets: [],
     links: [
       { label: "Code", href: "https://github.com/Zhenglin17/Research-Agent" },
@@ -74,27 +74,27 @@ export const items: ExperienceItem[] = [
   {
     slug: "normal-flow",
     title: "Normal Flow and Camera Ego-Motion Estimation",
-    subtitle: "Computer Vision · Sensor Fusion · 3D Vision · Optical Flow",
+    subtitle: "Event Cameras · Sensor Fusion · 3D Vision · Optical Flow",
     category: "Research",
     hasDetails: true,
-    tags: ["Computer Vision", "Sensor Fusion", "3D Vision", "Optical Flow", "PyTorch"],
+    tags: ["Event Cameras", "Sensor Fusion", "3D Vision", "Optical Flow", "PyTorch"],
     location: "College Park, MD",
-    period: "Dec 2023 – May 2024",
+    period: "Sep 2023 – Jan 2024",
     summary:
-      "End-to-end event camera normal flow pipeline with IMU fusion — cut rotation drift 50% and enabled stable downstream perception.",
+      "PhD research at UMD on normal flow for event cameras. Set up normal flow baselines on the EVIMO dataset, where only optical flow baselines existed before, and used the IMU's rotation to separate camera ego-motion from the flow.",
     bullets: [
-      "Built an end-to-end normal flow estimation pipeline for event cameras on EVIMO in PyTorch, with reproducible benchmarks against classical and learning-based baselines for more reliable model comparisons.",
-      "Fused IMU measurements with vision-derived flow to estimate camera ego-motion in a consistent world frame, reducing rotation drift by 50% through frame alignment checks and giving downstream perception more stable poses.",
-      "Organized training and evaluation into modular, configurable scripts with standardized datasets and metrics, making experiments easier to reproduce and share.",
+      "Helped define normal flow baselines on EVIMO. Earlier event camera work only reported optical flow baselines, so normal flow methods had nothing fair to be compared against.",
+      "Surveyed dozens of event-based flow papers and found almost none whose released code ran as published. Spent a significant amount of time studying, understanding, modifying and porting existing code, and brought E-RAFT, a learning-based optical flow model, to EVIMO as the learning-based baseline.",
+      "Mapped the IMU's axes to the camera frame and checked the result against motion-capture ground truth. Then used the IMU rotation to warp events and remove the rotational part of the normal flow, leaving translation and depth to be recovered from the rest.",
+      "Computed classical normal flow from events by fitting local planes to them, alongside ground-truth normal flow derived from EVIMO's optical flow.",
     ],
     links: [
       { label: "EVIMO Dataset", href: "https://better-flow.github.io/evimo/" },
-      { label: "Code (normal_flow)", href: "https://github.com/Zhenglin17/normal_flow" },
-      { label: "Code (e_raft_evimo)", href: "https://github.com/Zhenglin17/e_raft_evimo" },
+      { label: "Code (E-RAFT ported to EVIMO)", href: "https://github.com/Zhenglin17/e_raft_evimo" },
     ],
     images: [
       {
-        src: "https://better-flow.github.io/evimo/img/dataset.png",
+        src: "/media/normal-flow/evimo-dataset.png",
         alt: "EVIMO dataset preview",
         caption:
           "EVIMO — indoor event camera dataset with 200 Hz pose tracking, pixelwise object masks at 40 Hz, and depth maps.",
