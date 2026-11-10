@@ -132,14 +132,14 @@ export const items: ExperienceItem[] = [
   },
   {
     slug: "fruit-counting",
-    title: "Robust Fruit Counting",
+    title: "Fruit Counting with Detection, Tracking and SfM",
     subtitle: "Robotics Perception · System Engineering",
     category: "Research",
     tags: ["YOLO", "Kalman Filter", "Robotics Perception", "Multi-view Geometry"],
     location: "Philadelphia, PA",
     period: "Nov 2021 – Mar 2022",
     summary:
-      "Multi-stage fruit counting system for long image sequences, combining YOLO detection, association and motion modeling. Kalman filtering and multi-view geometry pose priors reduced double and multi-counting by 60% while staying within deployment runtime limits.",
+      "Extended a Penn lab's fruit counting pipeline, which combines detection, tracking and structure from motion, to long image sequences from the ACFR mango dataset. Swapped in a YOLOv4 detector, modified the Kalman filter tracking, and joined detection and COLMAP reconstruction into one runnable stack. With multi-view geometry, double and multi-counting dropped by 60% compared with 2D tracking alone.",
     bullets: [],
     links: [
       { label: "Code", href: "https://github.com/Zhenglin17/Counting-and-Tracking" },
