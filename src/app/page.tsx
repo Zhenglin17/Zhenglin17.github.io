@@ -40,7 +40,7 @@ export default function Home() {
               </span>
               <span className="text-[11px] leading-tight text-stone-500 transition-colors duration-300
                                group-hover/story:text-stone-600">
-                Discover the whole journey.
+                The longer, more personal version.
               </span>
             </Link>
           </li>
@@ -57,13 +57,15 @@ export default function Home() {
       <RidgeExplorer className="absolute inset-x-0 bottom-0 h-[24vh] sm:h-[34vh] animate-fade-in-fast" />
 
       <h1 className="py-3.5 px-0.5 z-10 text-4xl text-stone-800 cursor-default font-display sm:text-5xl md:text-7xl whitespace-nowrap">
-        Zhenglin Zhang
+        Zhenglin <span className="text-[0.45em] text-stone-400/70 align-middle">(Greyson)</span> Zhang
       </h1>
 
-      <p className="mt-3 px-6 max-w-xl text-center text-sm leading-relaxed text-stone-500 sm:text-base">
-        Building agent systems and data infrastructure.
+      {/* Keeps the name where it was; the tagline itself sits just above the ridge it describes. */}
+      <div aria-hidden className="mt-3 h-[2.85rem] sm:h-[3.25rem]" />
+      <p className="absolute inset-x-0 mx-auto bottom-[calc(24vh+5rem)] sm:bottom-[calc(34vh+5.5rem)] px-6 max-w-xl text-center text-sm leading-relaxed text-stone-500 sm:text-base">
+        Up some days, down others.
         <br />
-        Trained in robotics and 3D vision.
+        Still climbing, pack and all.
       </p>
 
       <footer className="absolute inset-x-0 bottom-5 flex items-center justify-center gap-3 text-xs text-stone-600">

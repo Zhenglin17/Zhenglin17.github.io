@@ -14,16 +14,19 @@ const calSans = localFont({
   variable: "--font-calsans",
 });
 
+const SITE_DESCRIPTION =
+  "Zhenglin (Greyson) Zhang: robotics and 3D vision by training, now building LLM systems, data tools and full-stack software.";
+
 export const metadata: Metadata = {
   title: {
-    default: "Zhenglin Zhang",
-    template: "%s | Zhenglin Zhang",
+    default: "Zhenglin (Greyson) Zhang",
+    template: "%s | Zhenglin (Greyson) Zhang",
   },
-  description: "Software Engineer",
+  description: SITE_DESCRIPTION,
   openGraph: {
-    title: "Zhenglin Zhang",
-    description: "Software Engineer",
-    siteName: "Zhenglin Zhang",
+    title: "Zhenglin (Greyson) Zhang",
+    description: SITE_DESCRIPTION,
+    siteName: "Zhenglin (Greyson) Zhang",
     locale: "en-US",
     type: "website",
   },

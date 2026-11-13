@@ -121,7 +121,7 @@ export default function TldrPage() {
           <div className="flex flex-col gap-10">
 
             <div>
-              <h1 className="text-3xl font-display text-stone-800 mb-2">Zhenglin Zhang</h1>
+              <h1 className="text-2xl sm:text-3xl font-display text-stone-800 mb-2">Zhenglin (Greyson) Zhang</h1>
               <div className="flex flex-col gap-1 text-sm">
                 <a href="mailto:zhenglinzhang6@gmail.com"
                    className="text-stone-500 hover:text-accent duration-200 w-fit">
