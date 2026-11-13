@@ -5,8 +5,8 @@ import { Reveal } from "../components/reveal";
 import { items, ExperienceItem } from "./data";
 
 // Desktop columns stay independent so cards of different heights sit staggered.
-const COL1_SLUGS = ["plantops", "research-agent", "feature-matching", "fruit-counting"];
-const COL2_SLUGS = ["asof", "normal-flow", "solo", "block-grabbing"];
+const COL1_SLUGS = ["plantops", "feature-matching", "fruit-counting", "solo"];
+const COL2_SLUGS = ["asof", "research-agent", "normal-flow", "block-grabbing"];
 const ALL_SLUGS   = ["plantops", "asof", "research-agent", "normal-flow", "feature-matching", "fruit-counting", "solo", "block-grabbing"];
 
 // Project names in the Narrative link to their detail pages.
@@ -71,8 +71,14 @@ function Card({ item, fill = false }: { item: ExperienceItem; fill?: boolean }) 
       </div>
       {item.period && <p className="text-stone-500 text-xs mb-2">{item.period}</p>}
       <p className="text-stone-600 text-xs leading-relaxed">{item.summary}</p>
-      <div className="flex flex-wrap gap-1 mt-3">
-        {item.tags.slice(0, 3).map((tag) => (
+      {/* Cards with a detail page keep tags to one row (a tag that does not fit wraps to a
+          hidden second row); the detail page lists them all. Other cards show every tag. */}
+      <div
+        className={`flex flex-wrap gap-x-1 mt-3 ${
+          item.hasDetails ? "gap-y-2 h-5 overflow-hidden" : "gap-y-1"
+        }`}
+      >
+        {(item.hasDetails ? item.tags.slice(0, 3) : item.tags).map((tag) => (
           <span
             key={tag}
             className="text-xs px-2 py-0.5 bg-stone-100 group-hover:bg-stone-200
@@ -109,7 +115,7 @@ export default function TldrPage() {
     <div>
       <Navigation />
       <div className="container mx-auto px-6 sm:px-8 pt-28 pb-16 max-w-6xl">
-        <div className="lg:grid lg:grid-cols-[9fr_10fr] lg:gap-16 space-y-12 lg:space-y-0">
+        <div className="lg:grid lg:grid-cols-[19fr_20fr] lg:gap-16 space-y-12 lg:space-y-0">
 
           {/* ── LEFT: Narrative ───────────────────── */}
           <div className="flex flex-col gap-10">

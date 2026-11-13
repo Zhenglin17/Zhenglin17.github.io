@@ -20,7 +20,7 @@ export const items: ExperienceItem[] = [
     subtitle: "Data Analyst at Wuhoo Tropicals · Full-Stack · Workflow Automation",
     category: "Work",
     hasDetails: true,
-    tags: ["Django", "PostgreSQL", "Workflow Automation", "OCR", "LLM Structured Output", "Docker"],
+    tags: ["Django", "PostgreSQL", "OCR", "Docker", "Playwright"],
     location: "Remote",
     period: "Jan 2026 – Present",
     summary:
@@ -41,7 +41,7 @@ export const items: ExperienceItem[] = [
     subtitle: "Data Engineering · LLM Evaluation · Backtesting · Statistical Testing",
     category: "Personal Project",
     hasDetails: true,
-    tags: ["Python", "DuckDB", "LLM Evaluation", "Backtesting", "Statistical Testing", "Data Pipelines"],
+    tags: ["Python", "DuckDB", "Backtesting", "LLM Evaluation", "Statistical Testing", "pandas"],
     location: "Independent",
     period: "Sep 2026 – Present",
     summary:
@@ -61,7 +61,7 @@ export const items: ExperienceItem[] = [
     title: "Research Digest Bot",
     subtitle: "LLM Pipelines · Automation",
     category: "Personal Project",
-    tags: ["Python", "LLM Pipelines", "Automation", "SQLite", "Telegram"],
+    tags: ["Python", "LLM Pipelines", "SQLite"],
     location: "Independent",
     period: "Apr 2026",
     summary:
@@ -77,7 +77,7 @@ export const items: ExperienceItem[] = [
     subtitle: "Event Cameras · Sensor Fusion · 3D Vision · Optical Flow",
     category: "Research",
     hasDetails: true,
-    tags: ["Event Cameras", "Sensor Fusion", "3D Vision", "Optical Flow", "PyTorch"],
+    tags: ["Optical Flow", "Sensor Fusion", "PyTorch", "3D Vision"],
     location: "College Park, MD",
     period: "Sep 2023 – Jan 2024",
     summary:
@@ -107,7 +107,7 @@ export const items: ExperienceItem[] = [
     subtitle: "3D Vision · Deep Learning",
     category: "Research",
     hasDetails: true,
-    tags: ["3D Vision", "Deep Learning", "COLMAP", "Event Camera"],
+    tags: ["Deep Learning", "3D Vision", "COLMAP"],
     location: "Philadelphia, PA",
     period: "May 2022 – Feb 2023",
     summary:
@@ -135,7 +135,7 @@ export const items: ExperienceItem[] = [
     title: "Fruit Counting with Detection, Tracking and SfM",
     subtitle: "Robotics Perception · System Engineering",
     category: "Research",
-    tags: ["YOLO", "Kalman Filter", "Robotics Perception", "Multi-view Geometry"],
+    tags: ["Object Detection", "COLMAP", "Structure from Motion"],
     location: "Philadelphia, PA",
     period: "Nov 2021 – Mar 2022",
     summary:
@@ -150,7 +150,7 @@ export const items: ExperienceItem[] = [
     title: "SOLO Instance Segmentation for Hemostatic Plug Microscopy",
     subtitle: "Instance Segmentation · Deep Learning · Model Architecture",
     category: "Course Project",
-    tags: ["Instance Segmentation", "Deep Learning", "ResNet-50", "GRU"],
+    tags: ["Instance Segmentation", "PyTorch", "Deep Learning", "Computer Vision"],
     location: "Philadelphia, PA",
     period: "Sep 2021 – Dec 2021",
     summary:
@@ -166,7 +166,7 @@ export const items: ExperienceItem[] = [
     title: "Block Grabbing · Robotic Arm Motion",
     subtitle: "Motion Planning · Control",
     category: "Course Project",
-    tags: ["Motion Planning", "A* Search", "PyBullet", "Rigid Body Transforms", "Control"],
+    tags: ["PyBullet", "Python"],
     location: "Philadelphia, PA",
     period: "Dec 2020",
     summary:
