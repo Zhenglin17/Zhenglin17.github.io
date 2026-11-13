@@ -5,14 +5,23 @@ import { Reveal } from "../components/reveal";
 import { items, ExperienceItem } from "./data";
 
 // Desktop columns stay independent so cards of different heights sit staggered.
-const COL1_SLUGS = ["plantops", "research-agent", "feature-matching", "solo"];
-const COL2_SLUGS = ["asof", "normal-flow", "fruit-counting", "block-grabbing"];
+const COL1_SLUGS = ["plantops", "research-agent", "feature-matching", "fruit-counting"];
+const COL2_SLUGS = ["asof", "normal-flow", "solo", "block-grabbing"];
 const ALL_SLUGS   = ["plantops", "asof", "research-agent", "normal-flow", "feature-matching", "fruit-counting", "solo", "block-grabbing"];
 
+// Project names in the Narrative link to their detail pages.
+const PROJECT_LINK =
+  "text-stone-800 font-medium underline underline-offset-2 decoration-stone-400 hover:text-accent hover:decoration-accent duration-200";
+
+// Every tool or method used in the projects, in one list.
 const SKILLS = [
-  "Python", "PyTorch", "NumPy", "pandas", "DuckDB", "TypeScript", "C", "Linux", "Git", "MATLAB",
-  "Computer Vision", "Deep Learning", "Robotics", "Sensor Fusion", "3D Vision",
-  "LLM Pipelines", "Data Pipelines", "Backtesting",
+  "Python", "SQL", "TypeScript", "C",
+  "PyTorch", "Deep Learning", "Computer Vision", "3D Vision", "Optical Flow", "Object Detection",
+  "Instance Segmentation", "Sensor Fusion", "Structure from Motion", "COLMAP", "OCR", "PyBullet",
+  "LLM Pipelines", "LLM Evaluation",
+  "pandas", "NumPy", "DuckDB", "Backtesting", "Statistical Testing",
+  "Django", "PostgreSQL", "SQLite", "React", "Next.js",
+  "Docker", "Playwright", "Git", "Linux",
 ];
 
 function Card({ item, fill = false }: { item: ExperienceItem; fill?: boolean }) {
@@ -100,9 +109,9 @@ export default function TldrPage() {
     <div>
       <Navigation />
       <div className="container mx-auto px-6 sm:px-8 pt-28 pb-16 max-w-6xl">
-        <div className="lg:grid lg:grid-cols-[5fr_7fr] lg:gap-16 space-y-12 lg:space-y-0">
+        <div className="lg:grid lg:grid-cols-[9fr_10fr] lg:gap-16 space-y-12 lg:space-y-0">
 
-          {/* ── LEFT: Narrative + Skills ───────────────────── */}
+          {/* ── LEFT: Narrative ───────────────────── */}
           <div className="flex flex-col gap-10">
 
             <div>
@@ -123,70 +132,80 @@ export default function TldrPage() {
               <h2 className="text-xs uppercase tracking-widest text-stone-500 mb-4">Narrative</h2>
               <div className="space-y-3 text-sm text-stone-600 leading-relaxed">
                 <p>
-                  From elementary school, I was on the olympiad math circuit — eight or nine
-                  competitions a year, first prize in seven of them. Looking back, I&rsquo;m not
-                  sure what the point was beyond training logical thinking. I genuinely wish I
-                  had spent more of that time building real interests. That absence set the tone
-                  for the years ahead. Middle school was more of the same. In 8th grade, I won
-                  first prize at the Math League — a 9th-grade competition. Then in high school,
-                  I made the provincial team for the{" "}
-                  <span className="text-stone-800 font-medium">National Physics Olympiad</span>.
-                  More firsts, same pattern.
+                  I was the kid who was good at tests. Math olympiads from elementary school,
+                  first prize at a 9th-grade Math League while I was in 8th grade, the
+                  provincial team for the{" "}
+                  <span className="text-stone-800 font-medium">National Physics Olympiad</span>{" "}
+                  in high school, then Theoretical and Applied Mechanics at{" "}
+                  <span className="text-stone-800 font-medium">Peking University</span>. I was
+                  always in the most competitive schools I could get into, and that somehow
+                  pushed me further than I would have gone on my own. What it never left much
+                  room for was finding out what I was actually passionate about. I still wonder
+                  sometimes how far I&rsquo;d have gone on a path I picked myself.
                 </p>
                 <p>
-                  I studied Theoretical and Applied Mechanics at{" "}
-                  <span className="text-stone-800 font-medium">Peking University</span> as an
-                  Outstanding Graduate, then pursued a Master&rsquo;s in Robotics at{" "}
-                  <span className="text-stone-800 font-medium">UPenn</span> — my first real
-                  exposure to computer vision and 3D vision, which came comparatively late. Then
-                  I began a PhD in Computer Science at{" "}
-                  <span className="text-stone-800 font-medium">UMD</span>, which I stepped away
-                  from after half a year. Maybe that outcome was set long before — back in
-                  elementary school, the first time I optimized for a metric without asking why.
+                  I carried the same pattern into a Master&rsquo;s in Robotics at{" "}
+                  <span className="text-stone-800 font-medium">UPenn</span>, where I first met
+                  computer vision, and then a CS PhD at{" "}
+                  <span className="text-stone-800 font-medium">UMD</span>. By then, as an adult,
+                  doing well was no longer about passing the next exam. It meant owning my part
+                  and producing something that mattered to the people around me, ideally more
+                  than what was asked. And the older I got, the harder it was to talk myself into
+                  a path just because it was the expected one, the way many people around me were
+                  doing. It was definitely a confusing stretch. Sometimes I envied people who had
+                  known since sophomore year what they wanted and were well on their way by then.
+                  Did they really know? Probably they never stopped to ask. I never doubted what I
+                  was capable of, but leaving was the hard part. I hesitated, and part of me
+                  wanted to stay and finish what I had started. Still, I left, looking for
+                  somewhere with more room to grow what I&rsquo;m good at: explaining,
+                  communicating and exploring. It was the first big decision I made purely for
+                  myself, and I&rsquo;m proud of it.
                 </p>
                 <p>
-                  This past year, I&rsquo;ve been building things just to explore them. A few
-                  friends and I assembled an{" "}
-                  <span className="text-stone-800 font-medium">E36 M3 race car from a bare frame</span>
-                  , then ran an endurance race at NJMP. I spent months deep in trading — my
-                  account fell 60% in one month, then climbed back 50% in three weeks. I explored
-                  some simple quantitative and automated methods — still aggressive, but I think
-                  life is more about experience than optimization.
+                  After twenty fairly intense years, I took a few months off and traveled. Then I
+                  explored something I&rsquo;d loved since landing in the US: cars. I spent a good
+                  part of a year around a friend&rsquo;s dealership, at auctions, buying, selling,
+                  fixing cars and talking with a lot of customers. I saw plenty that was funny,
+                  absurd, or simply out of reach for most people, and solved problems that looked
+                  impossible. It&rsquo;s also where I found those skills were real: I can explain
+                  things in a way that gets people on board, and I liked it more than I expected.
+                  On the track, I raced a Miata Cup car, and built an{" "}
+                  <span className="text-stone-800 font-medium">E36 M3 from a bare frame</span>{" "}
+                  with friends, then drove it in an endurance race at Road Atlanta. I also totaled
+                  my own ND Miata on a downhill corner at Atlanta Motorsports Park, with traction
+                  control off, which most of my friends never do. Once I start something, I want
+                  to do it the most challenging way. Sadly, that day the corner won.
                 </p>
                 <p>
-                  Maybe it was when I worked on the car until my back was about to give out, or
-                  when I was so exhausted while driving that I nearly fell asleep, or when
-                  trading led me to pay close attention to macroeconomics, technological shifts,
-                  and the evolution of companies — this is when I truly realized that some things
-                  are already reshaping the world quietly but fundamentally. Sometimes I look
-                  around at people on the street — happy, relaxed — as if none of these changes
-                  affect them. Yet the very skills they are most proud of today may be replaced
-                  in the near future.
+                  Then I got into trading. My strategy was aggressive and the account was choppy,
+                  but my read was often right. I shorted the Korean market two days before it fell more than ten percent on June 5, which was the first day
+                  of real panic and huge volatility since this bull run began. Discipline, though,
+                  took far longer to learn, because it goes against human nature. Gradually I
+                  found the most exciting part for me was never making more money, but working out
+                  why the market moved the way it did and catching it before it happened. That
+                  pushed me to test ideas with data and statistics instead of gut feeling, which
+                  later became <Link href="/tldr/asof" className={PROJECT_LINK}>asof</Link>, and
+                  it made me want to learn alongside people who know far more than I do, instead
+                  of alone at home in front of a screen.
                 </p>
                 <p>
-                  More recently I built{" "}
-                  <span className="text-stone-800 font-medium">asof</span>, a market research rig
-                  where data and language models can only use what was public at the time. I also
-                  built a{" "}
-                  <span className="text-stone-800 font-medium">research digest bot</span> that
-                  turns journal feeds into a short brief on Telegram.
+                  In 2025 a friend&rsquo;s small rare-plant company sponsored my H-1B, and I joined
+                  as a data analyst in January 2026. With a team that small, I got to own a whole
+                  system end to end:{" "}
+                  <Link href="/tldr/plantops" className={PROJECT_LINK}>PlantOps</Link>, which now
+                  runs their daily operations. Building it with coding agents showed me how fast
+                  AI is changing what one person can ship.
                 </p>
                 <p className="text-stone-700">
-                  I&rsquo;m back now — with more clarity and motivation than I&rsquo;ve ever had.{" "}
-                  <span className="font-medium">The search continues.</span>
+                  Next I want a team that builds at real scale, where I can learn how good
+                  engineering and good companies work. I&rsquo;m starting on the technical side,
+                  and I&rsquo;m just as curious about product and the business: where the money
+                  comes from, where it goes, and why.
                 </p>
-              </div>
-            </section>
-
-            <section>
-              <h2 className="text-xs uppercase tracking-widest text-stone-500 mb-4">Skills</h2>
-              <div className="flex flex-wrap gap-2">
-                {SKILLS.map((skill) => (
-                  <span key={skill}
-                        className="text-xs px-2.5 py-1 bg-stone-100 text-stone-600 rounded-full">
-                    {skill}
-                  </span>
-                ))}
+                <p>
+                  The longer version is in the{" "}
+                  <Link href="/story" className={PROJECT_LINK}>Full Story</Link>.
+                </p>
               </div>
             </section>
           </div>
@@ -219,6 +238,22 @@ export default function TldrPage() {
           </div>
 
         </div>
+
+        {/* Skills span both columns so the two columns above end on one line. */}
+        <section className="mt-12 lg:mt-16">
+          <h2 className="text-xs uppercase tracking-widest text-stone-500 mb-4">Skills</h2>
+          <div className="flex flex-wrap gap-2">
+            {SKILLS.map((skill) => (
+              <span key={skill}
+                    className="text-xs px-2.5 py-1 bg-stone-100 text-stone-600 rounded-full">
+                {skill}
+              </span>
+            ))}
+          </div>
+          <p className="text-[11px] text-stone-500 mt-3">
+            Some of these I have worked with through AI.
+          </p>
+        </section>
       </div>
     </div>
   );
